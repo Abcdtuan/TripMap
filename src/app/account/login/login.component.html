@@ -1,0 +1,30 @@
+<form [formGroup]="loginForm"  (submit)="login()" autocomplete="new -password">
+    <h1>Đăng nhập</h1>
+
+    <div class="form-control">
+        <label for="email">Email</label>
+        <input 
+            formControlName="email"           
+            id="email" 
+            autocomplete="new-password" 
+            type="email">
+    </div>
+    <div class="form-control">
+        <label for="password">Mật khẩu</label>
+        <input
+             formControlName="password"
+             id="password" 
+             autocomplete="new-password" 
+             type="password">
+        <div class="text-base">
+            <p>Yều cầu email</p>
+        </div>
+    </div>
+
+    <button type="submit"> Đăng nhập</button>
+    <div>
+        <p><a routerLink="/account/register">Đăng ký</a></p>
+        <p><a routerLink="">Quên mật khẩu?</a></p>
+    </div>
+    
+</form>

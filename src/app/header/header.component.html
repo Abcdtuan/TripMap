@@ -1,3 +1,4 @@
+
 <div class="header">
     <div class="shopName">
         <h2><a href="#" routerLink="/">Tripmap</a></h2>
@@ -14,13 +15,25 @@
     </div>
     <div class="left">
         <div class="searchbox">
-            <input type="text" placeholder="Tìm Kiếm...">
+            <input type="text" placeholder="Nhập từ khóa..." [(ngModel)]="searchTerm">
+            <button class="search-button" (click)="search()">Tìm kiếm</button>
+        </div>
+        <div class="menu-container">
+            <a routerLink="/dashboard">Tuấn</a>
+            <div class="menu"> 
+                <a routerLink="/profile">Hồ Sơ</a>
+                <a routerLink="/profile">Lịch sử giao dịch</a>
+                <a routerLink="/account/login">Đăng Xuất</a>
+            </div>  
         </div>
         <div class="signup">
-            <button>Đăng Nhập</button>
+            <button >Đăng Nhập</button>
         </div>
         <div class="icon">
-            <mat-icon color="red"><a href="#" routerLink="/">favorite</a></mat-icon>
+            <a routerLink="/favorite" class="favorite-icon">
+                <mat-icon>favorite</mat-icon>
+                <span class="favorite-count">3</span>
+            </a>
         </div>
     </div>
 </div>

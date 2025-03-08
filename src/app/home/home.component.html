@@ -1,6 +1,29 @@
 
+<div class="slide">
+  <img src="assets/slogan.jpg" alt="slide" />
+</div>
 <ul>
-  <li *ngFor="let tripItem of trip">
-    <img [src]="tripItem" alt="Trip Image" width="200">
+  <li *ngFor="let trip of trips">
+    <a routerLink="/trip/{{ trip.id }}">
+      <img src="{{ trip.imageUrl }}" alt="" />
+      <div class="content">
+        <div class="name">
+          {{ trip.name }}
+        </div>
+        <div>
+          <span class="favorite {{ trip.favorite ? '':'not'}}">
+            <mat-icon color="red">favorite</mat-icon>
+          </span>
+        </div>
+        <div class="stars">
+          <star-rating [stars]="trip.stars"></star-rating>
+        </div>
+        <div class="origin">
+          <span *ngFor="let origin of trip.origins">
+            {{origin}}
+          </span>
+        </div>
+      </div>
+    </a>
   </li>
 </ul>
