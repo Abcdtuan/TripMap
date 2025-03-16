@@ -1,3 +1,4 @@
+
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit} from '@angular/core';
@@ -16,7 +17,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   trips:Trip[] = [];
   allTrips: Trip[] = [];
   constructor(private tripservice:TripService, private route:ActivatedRoute) {
@@ -25,12 +26,17 @@ export class HomeComponent {
     this.allTrips = this.tripservice.getAll(); 
     this.route.queryParams.subscribe(params => { 
       const searchTerm = params['searchTerm']?.trim();
+      const tag = params['tag'];
       if (searchTerm) {
         const normalizedSearchTerm = this.normalizeString(searchTerm);
         this.trips = this.allTrips.filter(trip => 
           this.normalizeString(trip.name).includes(normalizedSearchTerm)
         );
-      } else {
+      } 
+      else if (tag) {
+        this.trips = this.tripservice.getAllTripsByTag(tag);
+      }
+      else {
         this.trips = this.allTrips;
       }
     });

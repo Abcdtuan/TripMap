@@ -20,5 +20,65 @@
                 {{ origin }}
             </span>
         </div>
+        <div class="tags">
+            <a *ngFor="let tag of trip.tag" routerLink="/tag{{tag}}">
+                {{tag}}
+            </a>
+        </div>
+        <div class="price">
+            {{ trip.price | currency:'VND' }}
+        </div>
+        <div class="button-group">
+            <button>Thêm vào yêu thích</button>
+        </div>
+
     </div>
 </div>
+<div class="information">
+    {{trip.information}}
+</div>
+<div class="schedule">
+    <h4>Lịch trình</h4>
+    <ul class="schedule">
+        <li *ngFor="let item of trip.schedule">
+            <strong>{{ item.time }}</strong>
+            <ul>
+                <li *ngFor="let act of item.activity">
+                    {{ act }}
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="combo-section">
+    <h3>Có vé trống cho bạn</h3>
+
+    <div class="calendar-container">
+        <button class="calendar-button">📅 Xem lịch</button>
+        <div class="date-list">
+            <button *ngFor="let day of days" (click)="selectDate(day)" 
+                [class.selected]="selectedDate?.getTime() === day.date.getTime()"> 
+                {{ day.label }}
+            </button>
+        </div>
+    </div>
+
+    <ng-container *ngIf="trip.combos?.length">
+        <div *ngFor="let combo of trip.combos" class="combo-item">
+          <h4>{{ combo.name }}</h4>
+          <ul class="combo-description">
+            <li *ngFor="let desc of combo.description">
+                {{ desc }}
+            </li>
+        </ul>
+          <span class="price">{{ combo.price | currency:'VND' }}</span>
+          <button [disabled]="!selectedDate" (click)="bookTicket(combo)" class="book-button">
+            Chọn vé
+          </button>
+        </div>
+      </ng-container>
+</div>
+
+
+
