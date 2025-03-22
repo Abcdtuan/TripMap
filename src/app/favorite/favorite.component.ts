@@ -6,12 +6,13 @@ import { TripService } from '../services/trip/trip.service';
 import { FavoriteItem } from '../shared/models/FavoriteItem';
 import { AppTitleComponent } from '../app-title/app-title.component';
 import { CommonModule } from '@angular/common';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { NotFoundComponent } from '../not-found/not-found.component';
 @Component({
   selector: 'app-favorite',
   standalone: true,
-  imports: [AppTitleComponent,CommonModule, NgFor, RouterLink],
+  imports: [AppTitleComponent,CommonModule, NgFor, RouterLink, NotFoundComponent, NgIf],
   templateUrl: './favorite.component.html',
   styleUrl: './favorite.component.scss'
 })

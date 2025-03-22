@@ -6,6 +6,10 @@ import { RegisterComponent } from './account/register/register.component';
 import { TripPageComponent } from './pages/trip-page/trip-page.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 
+import { ProfileComponent } from './profile/profile.component';
+import { TransationComponent } from './transation/transation.component';
+
+
 
 export const routes: Routes = [
     {path:'',component:HomeComponent},
@@ -13,6 +17,8 @@ export const routes: Routes = [
     {path:'trip/:id',component:TripPageComponent},
     {path:'tag/:tag',component:HomeComponent},
     {path:'favorite-page',component:FavoriteComponent},
+    {path:'profile',component: ProfileComponent},
+    {path:'transation', component: TransationComponent},
     {path:'account',component:AccountComponent,
         children: [
             {path:'login',component:LoginComponent},

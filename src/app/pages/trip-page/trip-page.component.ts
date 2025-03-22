@@ -7,14 +7,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { StarRatingComponent } from "../../star-rating/star-rating.component";
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-
-
+import { NotFoundComponent } from '../../not-found/not-found.component';
+import { NgIf } from '@angular/common';
 
 
 @Component({
   selector: 'app-trip-page',
   standalone: true,
-  imports: [MatIconModule, StarRatingComponent, CommonModule, RouterLink],
+  imports: [MatIconModule,NgIf, NotFoundComponent, StarRatingComponent, CommonModule, RouterLink],
   templateUrl: './trip-page.component.html',
   styleUrl: './trip-page.component.scss'
 })

@@ -1,5 +1,10 @@
 <app-title title="Favorite Page" margin="1.5rem 0 0 2.5rem"></app-title>
-<div class="container">
+<not-found 
+    [visible]="!favorite || !favorite.items.length"
+    notFoundMessage="Không có chuyến đi nào trong danh sách yêu thích"
+    resetLinkText="Quay lại trang chính">
+</not-found>
+<div *ngIf="favorite && favorite.items.length" class="container">
 <ul>
     <li *ngFor="let favorite of favorite.items">
         <div>
@@ -15,7 +20,7 @@
         </div>
         <div>
             <button class="remove-button" (click)="removeFromFavorite(favorite)">
-                Remove
+                Xóa khỏi yêu thích
             </button>
         </div>
     </li>

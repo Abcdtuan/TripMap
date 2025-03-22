@@ -1,0 +1,32 @@
+<div class="history-container">
+    <h2>Lịch sử giao dịch</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Mã đơn</th>
+          <th>Tên tour</th>
+          <th>Ngày đặt</th>
+          <th>Tổng tiền</th>
+          <th>Trạng thái</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let booking of bookings">
+          <td>{{ booking.id }}</td>
+          <td>{{ booking.tourName }}</td>
+          <td>{{ booking.bookingDate | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ booking.totalPrice | currency: 'VND':'symbol' }}</td>
+          <td>
+            <span [ngClass]="{
+              'paid': booking.status === 'Đã thanh toán',
+              'cancelled': booking.status === 'Đã huỷ',
+              'pending': booking.status === 'Đang xử lý'
+            }">
+              {{ booking.status }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

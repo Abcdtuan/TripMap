@@ -9,11 +9,12 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StarRatingComponent } from "../star-rating/star-rating.component";
 import { RouterModule } from '@angular/router';
+import { NotFoundComponent } from '../not-found/not-found.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, MatIconModule, ReactiveFormsModule, FormsModule, StarRatingComponent, RouterModule],
+  imports: [CommonModule, MatIconModule, ReactiveFormsModule, FormsModule, StarRatingComponent, RouterModule, NotFoundComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
