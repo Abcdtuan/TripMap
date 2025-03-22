@@ -7,6 +7,9 @@ import { sample_tags, sample_trips } from '../../../data';
   providedIn: 'root',
 })
 export class TripService {
+  getTrip(arg0: any): import("../../shared/models/Favorite").Favorite {
+    throw new Error('Method not implemented.');
+  }
   constructor() {}
 
   getAll(): Trip[] {

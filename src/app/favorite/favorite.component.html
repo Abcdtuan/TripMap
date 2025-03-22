@@ -1,1 +1,24 @@
-<p>favorite works!</p>
+<app-title title="Favorite Page" margin="1.5rem 0 0 2.5rem"></app-title>
+<div class="container">
+<ul>
+    <li *ngFor="let favorite of favorite.items">
+        <div>
+            <img [src]="favorite.trip.imageUrl" [alt]="favorite.trip.name">
+        </div>
+        <div>
+            <a routerLink = "/favorite/{{favorite.trip.id}}">
+                {{favorite.trip.name}}
+            </a>
+        </div>
+        <div>
+            {{favorite.trip.price | currency:'VND'}}
+        </div>
+        <div>
+            <button class="remove-button" (click)="removeFromFavorite(favorite)">
+                Remove
+            </button>
+        </div>
+    </li>
+</ul>
+    
+</div>

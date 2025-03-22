@@ -57,8 +57,8 @@ export class TripPageComponent {
   }
   addToFavorite() {
     this.favoriteService.addToFavorite(this.trip);
-    this.router.navigate(['/favorite-page']);
+    this.router.navigateByUrl('/favorite-page');
     console.log("Đã thêm vào yêu thích, chuyển hướng...");
-    this.router.navigate(['/favorite-page'])
+    this.router.navigateByUrl('/favorite-page')
   }
 }
