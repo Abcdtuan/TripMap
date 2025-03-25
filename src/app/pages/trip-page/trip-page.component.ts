@@ -7,14 +7,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { StarRatingComponent } from "../../star-rating/star-rating.component";
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-
-
+import { NotFoundComponent } from '../../not-found/not-found.component';
+import { NgIf } from '@angular/common';
 
 
 @Component({
   selector: 'app-trip-page',
   standalone: true,
-  imports: [MatIconModule, StarRatingComponent, CommonModule, RouterLink],
+  imports: [MatIconModule,NgIf, NotFoundComponent, StarRatingComponent, CommonModule, RouterLink],
   templateUrl: './trip-page.component.html',
   styleUrl: './trip-page.component.scss'
 })
@@ -59,6 +59,6 @@ export class TripPageComponent {
     this.favoriteService.addToFavorite(this.trip);
     this.router.navigateByUrl('/favorite-page');
     console.log("Đã thêm vào yêu thích, chuyển hướng...");
-    this.router.navigate(['/favorite-page'])
+    this.router.navigateByUrl('/favorite-page')
   }
 }

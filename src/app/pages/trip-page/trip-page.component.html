@@ -1,4 +1,9 @@
-<div class="container">
+<not-found 
+    [visible]="!trip.id"
+    notFoundMessage = "Không tìm thấy chuyến đi"
+    resetLinkText = "Quay lại trang chính"
+></not-found>
+<div *ngIf="trip.id"    class="container">
     <img [src]="trip.imageUrl" [alt]="trip.name">
 
     <div class="detail">

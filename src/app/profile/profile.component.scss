@@ -1,0 +1,49 @@
+.profile-card {
+    max-width: 400px;
+    margin: 3rem auto;
+    padding: 2rem;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+  
+  h2 {
+    margin: 0.5rem 0;
+    color: #333;
+  }
+  
+  .email {
+    color: #777;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .bio {
+    color: #555;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .edit-btn {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .edit-btn:hover {
+    background-color: #0056b3;
+  }
+  
