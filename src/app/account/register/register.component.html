@@ -1,18 +1,38 @@
-<form (submit)="register()" autocomplete="new-password">
+<form [formGroup]="registerForm" (submit)="register()" autocomplete="new-password">
     <h1>Đăng Ký</h1>
     <div class="form-control">
         <label for="email">Email</label>
-        <input id="email" autocomplete="new-password" type="email">
+        <input formControlName="email" id="email" autocomplete="new-password" type="email">
+        <div class="error-message" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+            <p *ngIf="registerForm.get('email')?.errors?.['required']">Email không được để trống!</p>
+            <p *ngIf="registerForm.get('email')?.errors?.['email']">Email không hợp lệ!</p>
+        </div>
     </div>
     <div class="form-control">
         <label for="password">Mật khẩu</label>
-        <input id="password" autocomplete="new-password" type="password">
+        <input formControlName="password"  id="password" autocomplete="new-password" type="password">
+        <div class="error-message" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+            <p *ngIf="registerForm.get('password')?.errors?.['required']">Mật khẩu không được để trống!</p>
+            <p *ngIf="registerForm.get('password')?.errors?.['pattern']">
+                Mật khẩu phải có ít nhất 8 ký tự, 1 chữ hoa, 1 chữ thường, 1 số và 1 ký tự đặc biệt!
+            </p>
+        </div>
     </div>
     <div class="form-control">
         <label for="new-password">Nhập lại mật khẩu</label>
-        <input type="password" id="password" autocomplete="new-password">
+        <input formControlName="confirmPassword" type="password" id="password" autocomplete="new-password">
+        <div class="error-message" *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched">
+            <p *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Vui lòng nhập lại mật khẩu!</p>
+            <p *ngIf="registerForm.hasError('passwordMismatch')">Mật khẩu nhập lại không khớp!</p>
+        </div>
     </div>
-    <button type="submit">
+    <button type="submit" [disabled]="registerForm.invalid">
         Đăng Ký
     </button>
+    <div>
+        <p><a routerLink="/account/login">Đăng nhập</a></p>
+    </div>
+    <div *ngIf="message" class="alert">
+        {{ message }}
+      </div>
 </form>

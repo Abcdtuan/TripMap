@@ -8,6 +8,10 @@
             id="email" 
             autocomplete="new-password" 
             type="email">
+            <div class="error-message" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+                <p *ngIf="loginForm.get('email')?.errors?.['required']">Email không được để trống!</p>
+                <p *ngIf="loginForm.get('email')?.errors?.['email']">Email không hợp lệ!</p>
+            </div>
     </div>
     <div class="form-control">
         <label for="password">Mật khẩu</label>
@@ -16,12 +20,12 @@
              id="password" 
              autocomplete="new-password" 
              type="password">
-        <div class="text-base">
-            <p>Yều cầu email</p>
-        </div>
+             <div class="error-message" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                <p *ngIf="loginForm.get('password')?.errors?.['required']">Mật khẩu không được để trống!</p>
+            </div>
     </div>
 
-    <button type="submit"> Đăng nhập</button>
+    <button type="submit" [disabled]="loginForm.invalid"> Đăng nhập</button>
     <div>
         <p><a routerLink="/account/register">Đăng ký</a></p>
         <p><a routerLink="">Quên mật khẩu?</a></p>

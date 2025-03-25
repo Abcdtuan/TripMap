@@ -19,6 +19,7 @@ export class FavoriteService {
       return;
     this.favorite.items.push(new FavoriteItem(trip));
     this.setFavoriteToLocalStorage();
+    console.log("Danh sách yêu thích sau khi thêm: ", this.favorite.items);
   }
   removeFromFavorite(trip: Trip): void {
     this.favorite.items = this.favorite.items.filter(item => item.trip.id !== trip.id);
