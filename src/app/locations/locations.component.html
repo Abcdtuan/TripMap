@@ -1,0 +1,30 @@
+<div class="container">
+    <h2>Danh sách địa điểm du lịch</h2>
+    
+    <!-- Ô tìm kiếm theo tỉnh -->
+    <input
+      type="text"
+      [(ngModel)]="searchProvince"
+      placeholder="Tìm kiếm theo tỉnh..."
+      (input)="filterLocations()"
+    />
+  
+    <div class="locations-list">
+      <!-- Lặp qua các địa điểm đã được lọc -->
+      <div
+        class="location-item"
+        *ngFor="let location of filteredLocations"
+      >
+        <img
+          [src]="location.imageUrl"
+          [alt]="location.name"
+          class="location-image"
+        />
+        <h3>{{ location.name }}</h3>
+        <p><strong>Tỉnh:</strong> {{ location.province }}</p>
+        <p><strong>Giá:</strong> {{ location.price | currency:'VND'}}</p>
+        <p><strong>Đánh giá:</strong> {{ location.rating }} ★</p>
+      </div>
+    </div>
+  </div>
+  

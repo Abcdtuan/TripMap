@@ -5,7 +5,7 @@ import { LoginComponent } from './account/login/login.component';
 import { RegisterComponent } from './account/register/register.component';
 import { TripPageComponent } from './pages/trip-page/trip-page.component';
 import { FavoriteComponent } from './favorite/favorite.component';
-
+import { LocationsComponent } from './locations/locations.component';
 import { ProfileComponent } from './profile/profile.component';
 import { TransationComponent } from './transation/transation.component';
 
@@ -19,6 +19,7 @@ export const routes: Routes = [
     {path:'favorite-page',component:FavoriteComponent},
     {path:'profile',component: ProfileComponent},
     {path:'transation', component: TransationComponent},
+    {path:'locations',component:LocationsComponent},
     {path:'account',component:AccountComponent,
         children: [
             {path:'login',component:LoginComponent},

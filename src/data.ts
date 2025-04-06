@@ -188,6 +188,7 @@ export const sample_trips: Trip[] = [
         ]
           
       },
+    
       {
         id: 5,
         name: 'Vé tham quan rừng dừa Bảy mẫu',

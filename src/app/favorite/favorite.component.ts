@@ -19,14 +19,17 @@ import { NotFoundComponent } from '../not-found/not-found.component';
 export class FavoriteComponent {
   favorite!: Favorite;
   constructor(private favoriteService: FavoriteService, private tripService: TripService, private activatedRoute: ActivatedRoute) {
+    // Lấy danh sách yêu thích từ dịch vụ
     this.favoriteService.getFavoriteObservable().subscribe((favorite) => {
       this.favorite = favorite;
     });
   }
   removeFromFavorite(favoriteItem : FavoriteItem) {
+    // Xóa một chuyến đi khỏi danh sách yêu thích
     this.favoriteService.removeFromFavorite(favoriteItem.trip);
   }
   changeQuantity(favoriteItem: FavoriteItem, quantityToString: string) {
+    // Chuyển đổi chuỗi số thành số nguyên
     const quantity = parseInt(quantityToString);
     this.favoriteService.changeQuantity(favoriteItem.trip.id, quantity);
   }
