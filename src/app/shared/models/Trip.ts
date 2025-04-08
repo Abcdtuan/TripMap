@@ -10,6 +10,7 @@ export class Trip{
     information!:string[];
     schedule?: ScheduleItem[];
     combos?: { name: string; price: number; description: string[] }[]; 
+
     
 }
 export interface ScheduleItem {

@@ -14,21 +14,26 @@ export class FavoriteService {
   constructor() { }
   addToFavorite(trip: Trip): void {
     console.log("Thêm vào yêu thích: ", trip);
-    let favoriteItem = this.favorite.items.find(item => item.trip.id === trip.id);
-    if(favoriteItem)
+    const exists = this.favorite.items.some(item => item.trip.id === trip.id);
+    if (exists) {
+      console.log("Chuyến đi đã có trong danh sách yêu thích.");
       return;
+    }
+
     this.favorite.items.push(new FavoriteItem(trip));
     this.setFavoriteToLocalStorage();
+    console.log("Đã thêm vào danh sách yêu thích.");
   }
   removeFromFavorite(trip: Trip): void {
     this.favorite.items = this.favorite.items.filter(item => item.trip.id !== trip.id);
+    this.setFavoriteToLocalStorage();
   }
-  changeQuantity(tripId: number, quantity: number): void {
+  changeQuantity(tripId: number, quantity:number): void {
     let favoriteItem = this.favorite.items.find(item => item.trip.id === tripId);
     if(!favoriteItem)
       return;
-    favoriteItem.quantity = quantity;
-    favoriteItem.price = favoriteItem.trip.price * quantity;
+    favoriteItem.price = favoriteItem.trip.price ;
+    favoriteItem.quantity = favoriteItem.quantity + quantity;
     this.setFavoriteToLocalStorage();
   }
   clearFavorite(){
@@ -45,9 +50,19 @@ export class FavoriteService {
     localStorage.setItem('favorite', favoriteJson);
     this.favoriteSubject.next(this.favorite);
   }
-  private getFavoriteFromLocalStorage():Favorite{
-    const favoriteJson = localStorage.getItem('favorite');
-    return favoriteJson ? JSON.parse(favoriteJson) : new Favorite();
+  private getFavoriteFromLocalStorage(): Favorite{
+    if (typeof window === 'undefined') 
+      return new Favorite();
+    const data = localStorage.getItem('favorite');
+    if (data) {
+      const parsed = JSON.parse(data);
+      const favorite = Object.assign(new Favorite(), parsed);
+      favorite.items = favorite.items.map((item: { trip: Trip; }) =>
+        Object.assign(new FavoriteItem(item.trip), item)
+      );
+      return favorite;
+    }
+    return new Favorite();
   }
 
 }

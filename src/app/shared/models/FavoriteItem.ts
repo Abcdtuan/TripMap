@@ -1,7 +1,7 @@
 import { Trip } from "./Trip";
 
 export class FavoriteItem{
-    quantity: number = 0;
+    quantity: number = 1;
     price: number;
 
     constructor(public trip: Trip) {

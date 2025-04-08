@@ -24,13 +24,14 @@ export class FavoriteComponent {
       this.favorite = favorite;
     });
   }
+  
   removeFromFavorite(favoriteItem : FavoriteItem) {
     // Xóa một chuyến đi khỏi danh sách yêu thích
     this.favoriteService.removeFromFavorite(favoriteItem.trip);
   }
-  changeQuantity(favoriteItem: FavoriteItem, quantityToString: string) {
+  changeQuantity(favoriteItem: FavoriteItem, quantity: string) {
     // Chuyển đổi chuỗi số thành số nguyên
-    const quantity = parseInt(quantityToString);
-    this.favoriteService.changeQuantity(favoriteItem.trip.id, quantity);
+    const quantityNumber = parseInt(quantity);
+    this.favoriteService.changeQuantity(favoriteItem.trip.id, quantityNumber);
   }
 }
