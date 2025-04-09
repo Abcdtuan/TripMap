@@ -1,0 +1,89 @@
+<form [formGroup]="tripForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label>Tên chuyến đi:</label>
+      <input type="text" formControlName="name" />
+    </div>
+  
+    <div>
+      <label>Giá:</label>
+      <input type="number" formControlName="price" />
+    </div>
+  
+    <div>
+      <label>Tags:</label>
+      <div formArrayName="tag">
+        <div *ngFor="let tagCtrl of tagControls; let i = index">
+          <input [formControl]="tagCtrl" />
+          <button type="button" (click)="removeTag(i)">X</button>
+        </div>
+        <button type="button" (click)="addTag()">+ Thêm tag</button>
+      </div>
+    </div>
+  
+    <div>
+      <label>Số sao:</label>
+      <input type="number" formControlName="stars" step="0.1" />
+    </div>
+  
+    <div>
+      <label>Ảnh:</label>
+      <input type="file" (change)="onImageSelected($event)" />
+      <div *ngIf="imagePreview">
+        <img [src]="imagePreview" alt="Preview" width="200" />
+      </div>
+    </div>
+  
+    <div>
+      <label>Địa điểm xuất phát:</label>
+      <select formControlName="origins" multiple>
+        <option *ngFor="let origin of listOfOrigins" [value]="origin">{{ origin }}</option>
+      </select>
+    </div>
+  
+    <div>
+      <label>Thông tin:</label>
+      <div formArrayName="information">
+        <div *ngFor="let infoCtrl of informationControls; let i = index">
+          <input [formControl]="infoCtrl" />
+          <button type="button" (click)="removeInformation(i)">X</button>
+        </div>
+        <button type="button" (click)="addInformation()">+ Thêm thông tin</button>
+      </div>
+    </div>
+  
+    <div formArrayName="schedule">
+      <label>Lịch trình:</label>
+      <div *ngFor="let scheduleGroup of scheduleControls; let i = index" [formGroupName]="i">
+        <input formControlName="time" placeholder="Thời gian" />
+        <div formArrayName="activity">
+          <div *ngFor="let actCtrl of getActivityControls(i); let j = index">
+            <input [formControl]="actCtrl" />
+            <button type="button" (click)="removeActivity(i, j)">X</button>
+          </div>
+          <button type="button" (click)="addActivity(i)">+ Thêm hoạt động</button>
+        </div>
+        <button type="button" (click)="removeSchedule(i)">X</button>
+      </div>
+      <button type="button" (click)="addSchedule()">+ Thêm lịch trình</button>
+    </div>
+  
+    <div formArrayName="combos">
+      <label>Combo:</label>
+      <div *ngFor="let comboGroup of comboControls; let i = index" [formGroupName]="i">
+        <input formControlName="name" placeholder="Tên combo" />
+        <input formControlName="price" type="number" placeholder="Giá" />
+        <div formArrayName="description">
+          <div *ngFor="let descCtrl of getComboDescriptionControls(i); let j = index">
+            <input [formControl]="descCtrl" />
+            <button type="button" (click)="removeComboDescription(i, j)">X</button>
+          </div>
+          <button type="button" (click)="addComboDescription(i)">+ Thêm mô tả</button>
+        </div>
+        <button type="button" (click)="removeCombo(i)">X</button>
+      </div>
+      <button type="button" (click)="addCombo()">+ Thêm combo</button>
+    </div>
+  
+    <button type="submit" [disabled]="tripForm.invalid">Lưu chuyến đi</button>
+  </form>
+  

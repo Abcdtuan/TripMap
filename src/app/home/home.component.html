@@ -13,11 +13,6 @@
         <div class="name">
           {{ trip.name }}
         </div>
-        <div>
-          <span class="favorite {{ trip.favorite ? '':'not'}}">
-            <mat-icon color="red">favorite</mat-icon>
-          </span>
-        </div>
         <div class="stars">
           <star-rating [stars]="trip.stars"></star-rating>
         </div>

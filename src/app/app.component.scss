@@ -1,0 +1,137 @@
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px;
+    border-bottom: 1px solid #ddd;
+}
+
+.shopName h2 a {
+    margin: 0;
+    font-size: 30px;
+    color: coral;
+    
+}
+
+.header1 .list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    
+}
+
+.header1 .list li a {
+    margin: 0 15px;
+    font-size: 16px;
+    color: #555;
+    
+}
+a{
+    text-decoration: none;
+    color: rgb(246, 46, 46);
+}
+.left {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+.searchbox {
+    position: relative;
+    width: 250px;
+}
+
+.searchbox input  {
+    width: 100%;
+    padding: 10px 40px 10px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    width: 200px;
+    outline: none;
+}
+.searchbox .search-button {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 16px;
+    color: #007bff;
+}
+
+.searchbox .search-button:hover {
+    color: #0056b3;
+}
+
+.signup button  {
+    padding: 5px 15px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #057af7;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    
+}
+.signup button:hover {
+    background-color: #0056b3;
+}
+
+.icon mat-icon {
+    cursor: pointer;
+}
+.favorite-icon {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+    color: red;
+}
+
+.favorite-count {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: #057af7;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 3px 6px;
+}
+.menu-container{
+    position: relative;
+}
+.menu{
+    position: absolute;
+    top: 100%; /* Đẩy menu xuống dưới */
+    left: 0;
+    width: 180px; /* Đặt độ rộng cố định */
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng cho đẹp */
+    display: none;
+    padding: 10px 0; /* Tạo khoảng cách bên trong */
+    z-index: 10;
+}
+.menu-container:hover .menu{
+    display: block;
+}
+.menu a {
+    display: block;
+    padding: 10px 15px; /* Tạo khoảng cách dễ nhìn */
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+    transition: background 0.3s ease-in-out;
+}
+.menu a:hover {
+    background: #007bff;
+    color: white;
+}
