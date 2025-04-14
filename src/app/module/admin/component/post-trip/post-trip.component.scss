@@ -1,70 +1,76 @@
-form {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 24px;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    font-family: Arial, sans-serif;
-  }
-  
-  form > div {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 6px;
-  }
-  
-  input[type="text"],
-  input[type="number"],
-  select,
-  input[type="file"] {
-    width: 100%;
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-  }
-  
-  button {
-    margin-top: 6px;
-    padding: 6px 12px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  
-  button[type="button"] {
-    background-color: #28a745;
-    margin-left: 4px;
-  }
-  
-  button[type="button"]:nth-child(2n) {
-    background-color: #dc3545;
-  }
-  
-  button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  img {
-    margin-top: 10px;
-    border-radius: 6px;
-    max-width: 100%;
-    height: auto;
-  }
-  
-  form > div > div,
-  form div[formArrayName] > div {
-    border-left: 4px solid #f0f0f0;
-    padding-left: 12px;
-    margin-bottom: 12px;
-  }
-  
+.trip-form {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+}
+
+.trip-form__title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.trip-form__label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+.trip-form__input,
+.trip-form__select,
+.trip-form__textarea,
+.trip-form__file {
+  width: 100%;
+  padding: 8px 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.trip-form__textarea {
+  min-height: 60px;
+}
+
+.trip-form__btn {
+  background-color: #007bff;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.trip-form__btn--remove {
+  background-color: #dc3545;
+  margin-left: 10px;
+}
+
+.trip-form__btn:hover {
+  opacity: 0.9;
+}
+
+.trip-form__submit {
+  display: block;
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.trip-form__submit:hover {
+  background-color: #0056b3;
+}
+.trip-form__add-section {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}

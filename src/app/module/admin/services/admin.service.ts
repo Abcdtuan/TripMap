@@ -1,9 +1,28 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { StorageService } from '../../../services/storage.service';
 
+const BASIC_URL = ["http://localhost:8080"];
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  postTrip(tripDto: any):Observable<any>{
+    return this.http.post(BASIC_URL + '/api/admin/trip', tripDto,{
+      headers:this.createAuthorizationHeader()
+    });
+  }
+  createAuthorizationHeader(): HttpHeaders {
+    let authHeaders: HttpHeaders = new HttpHeaders();
+    return authHeaders.set(
+      'Authorization',
+      'Bearer '+ StorageService.getToken()
+    )
+  }
+
+
 }

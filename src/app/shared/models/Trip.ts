@@ -3,7 +3,6 @@ export class Trip{
     name!:string;
     price!:number;
     tag:string[] = [];
-    favorite:boolean = false;
     stars: number = 0;
     imageUrl!:string;
     origins!:string[];

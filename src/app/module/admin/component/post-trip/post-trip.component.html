@@ -1,89 +1,58 @@
-<form [formGroup]="tripForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label>Tên chuyến đi:</label>
-      <input type="text" formControlName="name" />
+<form [formGroup]="postTripForm" (ngSubmit)="submitForm()" class="trip-form">
+
+  <h2 class="trip-form__title">Đăng chuyến đi</h2>
+
+  <label class="trip-form__label">Tên chuyến đi:</label>
+  <input type="text" formControlName="name" class="trip-form__input" />
+
+  <label class="trip-form__label">Giá:</label>
+  <input type="number" formControlName="price" class="trip-form__input" />
+
+  <label class="trip-form__label">Số sao:</label>
+  <input type="number" formControlName="stars" min="0" max="5" class="trip-form__input" placeholder="Nhập số sao (0 - 5)" />
+
+  <label class="trip-form__label">Thông tin:</label>
+  <textarea formControlName="information" class="trip-form__textarea"></textarea>
+
+  <!-- Schedule -->
+  <label class="trip-form__label">Lịch trình:</label>
+  <div formArrayName="schedule" class="trip-form__schedule">
+    <div *ngFor="let s of schedule.controls; let i = index" [formGroupName]="i" class="trip-form__schedule-item">
+      <input type="time" formControlName="from" class="trip-form__input" />
+      <input type="time" formControlName="to" class="trip-form__input" />
+      <input type="text" formControlName="activity" placeholder="Hoạt động" class="trip-form__input" />
+      <button type="button" (click)="removeSchedule(i)" class="trip-form__btn trip-form__btn--remove">X</button>
     </div>
-  
-    <div>
-      <label>Giá:</label>
-      <input type="number" formControlName="price" />
+  </div>
+  <button type="button" (click)="addSchedule()" class="trip-form__btn">+ Thêm mục</button>
+
+  <!-- Combo -->
+  <label class="trip-form__label">Combo:</label>
+  <div formArrayName="combos" class="trip-form__combos">
+    <div *ngFor="let c of combos.controls; let i = index" [formGroupName]="i" class="trip-form__combo-item">
+      <input type="text" formControlName="name" placeholder="Tên combo" class="trip-form__input" />
+      <input type="number" formControlName="price" placeholder="Giá" class="trip-form__input" />
+      <input type="text" formControlName="description" placeholder="Mô tả" class="trip-form__input" />
+      <button type="button" (click)="removeCombo(i)" class="trip-form__btn trip-form__btn--remove">X</button>
     </div>
-  
-    <div>
-      <label>Tags:</label>
-      <div formArrayName="tag">
-        <div *ngFor="let tagCtrl of tagControls; let i = index">
-          <input [formControl]="tagCtrl" />
-          <button type="button" (click)="removeTag(i)">X</button>
-        </div>
-        <button type="button" (click)="addTag()">+ Thêm tag</button>
-      </div>
-    </div>
-  
-    <div>
-      <label>Số sao:</label>
-      <input type="number" formControlName="stars" step="0.1" />
-    </div>
-  
-    <div>
-      <label>Ảnh:</label>
-      <input type="file" (change)="onImageSelected($event)" />
-      <div *ngIf="imagePreview">
-        <img [src]="imagePreview" alt="Preview" width="200" />
-      </div>
-    </div>
-  
-    <div>
-      <label>Địa điểm xuất phát:</label>
-      <select formControlName="origins" multiple>
-        <option *ngFor="let origin of listOfOrigins" [value]="origin">{{ origin }}</option>
-      </select>
-    </div>
-  
-    <div>
-      <label>Thông tin:</label>
-      <div formArrayName="information">
-        <div *ngFor="let infoCtrl of informationControls; let i = index">
-          <input [formControl]="infoCtrl" />
-          <button type="button" (click)="removeInformation(i)">X</button>
-        </div>
-        <button type="button" (click)="addInformation()">+ Thêm thông tin</button>
-      </div>
-    </div>
-  
-    <div formArrayName="schedule">
-      <label>Lịch trình:</label>
-      <div *ngFor="let scheduleGroup of scheduleControls; let i = index" [formGroupName]="i">
-        <input formControlName="time" placeholder="Thời gian" />
-        <div formArrayName="activity">
-          <div *ngFor="let actCtrl of getActivityControls(i); let j = index">
-            <input [formControl]="actCtrl" />
-            <button type="button" (click)="removeActivity(i, j)">X</button>
-          </div>
-          <button type="button" (click)="addActivity(i)">+ Thêm hoạt động</button>
-        </div>
-        <button type="button" (click)="removeSchedule(i)">X</button>
-      </div>
-      <button type="button" (click)="addSchedule()">+ Thêm lịch trình</button>
-    </div>
-  
-    <div formArrayName="combos">
-      <label>Combo:</label>
-      <div *ngFor="let comboGroup of comboControls; let i = index" [formGroupName]="i">
-        <input formControlName="name" placeholder="Tên combo" />
-        <input formControlName="price" type="number" placeholder="Giá" />
-        <div formArrayName="description">
-          <div *ngFor="let descCtrl of getComboDescriptionControls(i); let j = index">
-            <input [formControl]="descCtrl" />
-            <button type="button" (click)="removeComboDescription(i, j)">X</button>
-          </div>
-          <button type="button" (click)="addComboDescription(i)">+ Thêm mô tả</button>
-        </div>
-        <button type="button" (click)="removeCombo(i)">X</button>
-      </div>
-      <button type="button" (click)="addCombo()">+ Thêm combo</button>
-    </div>
-  
-    <button type="submit" [disabled]="tripForm.invalid">Lưu chuyến đi</button>
-  </form>
-  
+  </div>
+  <button type="button" (click)="addCombo()" class="trip-form__btn">+ Thêm combo</button>
+
+  <!-- Select -->
+  <label class="trip-form__label">Loại hình du lịch:</label>
+  <select formControlName="tag" class="trip-form__select">
+    <option *ngFor="let tag of listOfTags" [value]="tag">{{ tag }}</option>
+  </select>
+
+  <label class="trip-form__label">Địa điểm du lịch:</label>
+  <select formControlName="origin" class="trip-form__select">
+    <option *ngFor="let o of listOfOrigins" [value]="o">{{ o }}</option>
+  </select>
+
+  <!-- Image -->
+  <label class="trip-form__label">Ảnh đại diện:</label>
+  <input type="file" class="trip-form__file" />
+
+  <!-- Submit -->
+  <button type="submit" class="trip-form__submit">Đăng chuyến đi</button>
+</form>

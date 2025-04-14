@@ -1,170 +1,164 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Trip } from '../../../../shared/models/Trip';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
-
+import { AdminService } from '../../services/admin.service';
+import { Router } from '@angular/router';
+import { error } from 'console';
 @Component({
   selector: 'app-post-trip',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './post-trip.component.html',
   styleUrl: './post-trip.component.scss'
 })
-export class PostTripComponent {
+export class PostTripComponent  {
   isSpinning: boolean = false;
   selectedFile: File | null = null;
   imagePreview: string | ArrayBuffer | null = null;
-  listOfTags: string[] = ['Du lịch biển đảo', 'Du lịch trải nghiệm', 'Du lịch nghỉ dưỡng', 'Du lịch tâm linh'];
-  listOfOrigins = ["Quảng Ninh","Nha TRang","Hội An","Đà Nẵng"];
-  
+  postTripForm!: FormGroup;
 
-  tripForm: FormGroup;
-  constructor(private fb: FormBuilder) {
-    this.tripForm = this.fb.group({
-      id: [null],
+  listOfTags: string[] = ['Du lịch biển đảo', 'Du lịch trải nghiệm', 'Du lịch nghỉ dưỡng', 'Du lịch tâm linh', 'Công viên giải trí'];
+  listOfOrigins: string[] = ['Quảng Ninh', 'Nha TRang', 'Hội An', 'Đà Nẵng'];
+
+  showAddTag = false;
+  newTag = '';
+  showAddOrigin = false;
+  newOrigin = '';
+  message: string = "";
+
+  constructor(private fb: FormBuilder, private adminService:AdminService, private router:Router) {}
+
+  ngOnInit(): void {
+    this.postTripForm = this.fb.group({
       name: ['', Validators.required],
       price: [0, Validators.required],
-      stars: [0],
-      imageUrl: [''],
-      tag: this.fb.array([]),
-      origins: this.fb.array([]),
-      information: this.fb.array([]),
-      schedule: this.fb.array([]),
-      combos: this.fb.array([])
+      stars: [0, [Validators.required, Validators.min(0), Validators.max(5)]],
+      information: [''],
+      tag: ['', Validators.required],
+      origin: ['', Validators.required],
+      schedule: this.fb.array([
+        this.fb.group({
+          from: ['', Validators.required],
+          to: ['', Validators.required],
+          activity: ['', Validators.required]
+        })
+      ]),
+      combos: this.fb.array([
+        this.fb.group({
+          name: [''],
+          price: [0],
+          description: ['']
+        })
+      ])
     });
   }
+  postTrip(){
+    console.log(this.postTripForm.value);
+    this.isSpinning = true;
+    const formData: FormData = new FormData();
+    if (this.selectedFile) {
+      formData.append('img', this.selectedFile);
+    }
+    formData.append('name', this.postTripForm.get('name')!.value);
+    formData.append('price', this.postTripForm.get('price')!.value.toString());
+    formData.append('stars', this.postTripForm.get('stars')!.value.toString());
+    formData.append('information', this.postTripForm.get('information')!.value);
+    formData.append('tag', this.postTripForm.get('tag')!.value);
+    formData.append('origin', this.postTripForm.get('origin')!.value);
+    formData.append('schedule', JSON.stringify(this.postTripForm.value.schedule));
+    formData.append('combos', JSON.stringify(this.postTripForm.value.combos));
+    console.log(formData)
+    this.adminService.postTrip(formData).subscribe({
+      next: (res) => {
+        this.isSpinning = false;
+        this.message = 'Đăng bài thành công!';
+        setTimeout(() => this.message = '', 5000);
+        this.router.navigateByUrl('/admin/dashboard');
+        console.log(res);
+      },
+      error: (err) => {
+        this.message = 'Đăng bài thất bại!';
+        setTimeout(() => this.message = '', 5000);
+        console.error(err);
+      }
+    });
+  
+  }
 
-  // ========== TAGS ==========
-  get tagArray(): FormArray {
-    return this.tripForm.get('tag') as FormArray;
-  }
- 
-  addTag(): void {
-    this.tagArray.push(new FormControl(''));
-  }
-  removeTag(index: number) {
-    this.tagArray.removeAt(index);
+  get schedule(): FormArray {
+    return this.postTripForm.get('schedule') as FormArray;
   }
 
-  // ========== ORIGINS ==========
-  get originsArray(): FormArray {
-    return this.tripForm.get('origins') as FormArray;
+  addSchedule(): void {
+    this.schedule.push(this.fb.group({
+      from: ['', Validators.required],
+      to: ['', Validators.required],
+      activity: ['', Validators.required]
+    }));
   }
-  toggleOrigin(origin: string) {
-    const index = this.originsArray.value.indexOf(origin);
-    if (index > -1) {
-      this.originsArray.removeAt(index);
-    } else {
-      this.originsArray.push(new FormControl(origin));
+
+  removeSchedule(index: number): void {
+    this.schedule.removeAt(index);
+  }
+
+  get combos(): FormArray {
+    return this.postTripForm.get('combos') as FormArray;
+  }
+
+  addCombo(): void {
+    this.combos.push(this.fb.group({
+      name: [''],
+      price: [0],
+      description: ['']
+    }));
+  }
+
+  removeCombo(index: number): void {
+    this.combos.removeAt(index);
+  }
+
+  addNewTag() {
+    if (this.newTag && !this.listOfTags.includes(this.newTag)) {
+      this.listOfTags.push(this.newTag);
+      this.postTripForm.patchValue({ tag: this.newTag });
+      this.newTag = '';
+      this.showAddTag = false;
     }
   }
 
-  // ========== INFORMATION ==========
-  get informationArray(): FormArray {
-    return this.tripForm.get('information') as FormArray;
-  }
-  addInformation(info: string = '') {
-    this.informationArray.push(new FormControl(info));
-  }
-  removeInformation(index: number) {
-    this.informationArray.removeAt(index);
+  addNewOrigin() {
+    if (this.newOrigin && !this.listOfOrigins.includes(this.newOrigin)) {
+      this.listOfOrigins.push(this.newOrigin);
+      this.postTripForm.patchValue({ origin: this.newOrigin });
+      this.newOrigin = '';
+      this.showAddOrigin = false;
+    }
   }
 
-  // ========== SCHEDULE ==========
-  get scheduleArray(): FormArray {
-    return this.tripForm.get('schedule') as FormArray;
-  }
-  addSchedule(time: string = '') {
-    this.scheduleArray.push(this.fb.group({
-      time: [time],
-      activity: this.fb.array([])
-    }));
-  }
-  removeSchedule(index: number) {
-    this.scheduleArray.removeAt(index);
-  }
-  addActivity(scheduleIndex: number, activity: string = '') {
-    const activityArray = this.scheduleArray.at(scheduleIndex).get('activity') as FormArray;
-    activityArray.push(new FormControl(activity));
-  }
-  removeActivity(scheduleIndex: number, activityIndex: number) {
-    const activityArray = this.scheduleArray.at(scheduleIndex).get('activity') as FormArray;
-    activityArray.removeAt(activityIndex);
-  }
-
-  // ========== COMBOS ==========
-  get combosArray(): FormArray {
-    return this.tripForm.get('combos') as FormArray;
-  }
-  addCombo() {
-    this.combosArray.push(this.fb.group({
-      name: [''],
-      price: [0],
-      description: this.fb.array([])
-    }));
-  }
-  removeCombo(index: number) {
-    this.combosArray.removeAt(index);
-  }
-  addComboDescription(comboIndex: number, desc: string = '') {
-    const descArray = this.combosArray.at(comboIndex).get('description') as FormArray;
-    descArray.push(new FormControl(desc));
-  }
-  removeComboDescription(comboIndex: number, descIndex: number) {
-    const descArray = this.combosArray.at(comboIndex).get('description') as FormArray;
-    descArray.removeAt(descIndex);
-  }
-
-  // ========== IMAGE ==========
-  onImageSelected(event: any) {
+  onFileSelected(event: any): void {
     const file = event.target.files[0];
     if (file) {
       this.selectedFile = file;
+
       const reader = new FileReader();
       reader.onload = () => {
         this.imagePreview = reader.result;
-        this.tripForm.get('imageUrl')?.setValue(reader.result as string); // dùng nếu muốn lưu preview vào imageUrl
       };
       reader.readAsDataURL(file);
     }
   }
 
-  // ========== SUBMIT ==========
-  onSubmit() {
-    if (this.tripForm.valid) {
-      const trip: Trip = this.tripForm.value;
-      console.log('Trip submitted:', trip);
-      // Gửi về server, xử lý tiếp...
-    } else {
-      console.log('Form chưa hợp lệ');
+  submitForm(): void {
+    if (this.postTripForm.invalid) {
+      this.schedule.controls.forEach((control, index) => {
+        console.warn(`Schedule ${index} invalid:`, control.invalid, control.errors);
+      });
+      alert('Vui lòng điền đầy đủ thông tin hợp lệ!');
+      return;
     }
-  }
-  get tagControls(): FormControl[] {
-    return (this.tripForm.get('tag') as FormArray).controls as FormControl[];
-  }
   
-  get informationControls(): FormControl[] {
-    return (this.tripForm.get('information') as FormArray).controls as FormControl[];
-  }
-  
-  get scheduleControls(): FormGroup[] {
-    return (this.tripForm.get('schedule') as FormArray).controls as FormGroup[];
-  }
-  
-  get comboControls(): FormGroup[] {
-    return (this.tripForm.get('combos') as FormArray).controls as FormGroup[];
-  }
-  
-  getComboDescriptionControls(i: number): FormControl[] {
-    return ((this.tripForm.get('combos') as FormArray)
-      .at(i)
-      .get('description') as FormArray).controls as FormControl[];
-  }
-  
-  getActivityControls(i: number): FormControl[] {
-    return ((this.tripForm.get('schedule') as FormArray)
-      .at(i)
-      .get('activity') as FormArray).controls as FormControl[];
+    // Nếu hợp lệ thì gọi API
+    this.postTrip();
   }
 }

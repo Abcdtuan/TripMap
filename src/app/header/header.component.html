@@ -32,7 +32,7 @@
         <div class="icon">
             <a routerLink="/favorite-page" class="favorite-icon">
                 <mat-icon>favorite</mat-icon>
-                <span class="favorite-count">3</span>
+                <span class="favorite-count" *ngIf="favoriteCount ">{{favoriteCount}}</span>
             </a>
         </div>
     </div>

@@ -4,23 +4,31 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { StorageService } from '../services/storage.service';
+import { FavoriteService } from '../services/trip/favorite.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatIconModule,FormsModule,RouterLink],
+  imports: [MatIconModule,FormsModule,RouterLink,CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
   
   searchTerm: string = '';
-  constructor(private router: Router) {} 
+  favoriteCount = 0;
+  constructor(private router: Router, favoriteSevice: FavoriteService) {
+    favoriteSevice.getFavoriteObservable().subscribe((favorite) => {
+    this.favoriteCount = favorite.totalCount;
+    })
+  } 
 
    logout(){
       StorageService.logout();
       this.router.navigate(['/account/login']);
     }
+    
 
   search() {
     if (this.searchTerm.trim()) {

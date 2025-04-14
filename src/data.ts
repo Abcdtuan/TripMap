@@ -9,7 +9,6 @@ export const sample_trips: Trip[] = [
         stars: 5,
         imageUrl: 'assets/Sun-World-Ba-Na-Hills-in-Da-.webp',
         tag: ['Du lịch trải nghiệm'],
-        favorite: false,
         information: ['Cầu vàng là một công trình nổi tiếng tại Việt Nam,Tận hưởng khung cảnh tuyệt vời của đỉnh Bà Nà đứng trên cầu Vàng, một trong những chiếc cầu đẹp nhất thế giới'],
         schedule: [
       ],
@@ -43,7 +42,7 @@ export const sample_trips: Trip[] = [
         stars: 4.8,
         imageUrl: 'assets/TTC-Doc-Let-Beach-Tiny-Zoo-Nha-Trang.webp',
         tag: ['Du lịch biển đảo'],
-        favorite: true,
+      
         information:['Tham quan Hòn Mun – điểm đến lý tưởng với các hoạt dộng vui chơi như: Chèo thuyền kayak, chèo SUP, nhà phao trên biển, bơi ngắm san hô, lặn biển,...'],
         schedule: [
          {
@@ -98,7 +97,6 @@ export const sample_trips: Trip[] = [
         tag: ['Du lịch trải nghiệm',
               'Du lịch biển đảo'
         ],
-        favorite: false,
         information: [
             `Khám phá vịnh Hạ Long trên du thuyền 6 sao cực kỳ sang trọng.
              Dành thời gian ở đảo Titov nơi bạn sẽ chứng kiến được toàn cảnh tuyệt đẹp của vịnh.
@@ -156,7 +154,6 @@ export const sample_trips: Trip[] = [
         stars: 4.2,
         imageUrl: 'assets/Hon-Tam-Nha-Trang.webp',
         tag: ['Du lịch nghỉ dưỡng'],
-        favorite: false,
         information:['Nuông chiều bản thân với các dịch vụ tiện lợi tàu cao tốc khứ hồi, đồ uống chào mừng, bữa trưa tự chọn và tất cả các loại tiện ích để biến một ngày ở bãi biển trở nên hoàn hảo',
                     'Ngỡ ngàng trước cảnh quan tuyệt đẹp của Hòn Tằm'],
         schedule: [
@@ -196,7 +193,6 @@ export const sample_trips: Trip[] = [
         stars: 4.5,
         imageUrl: 'assets/Coconut-Jungle-Basket-Boat-Ride.webp',
         tag: ['Du lịch trải nghiệm'],
-        favorite: false,
         information:['Tham gia một chuyến đi ngắn đến rừng dừa Bảy Mẫu trên chiếc thuyền thúng dân dã trước khi xem show diễn',
                     'Ngồi thuyền thúng len lỏi trong những rặng dừa xanh ngắt và tận hưởng không khí trong lành'],
         schedule: [
@@ -234,7 +230,6 @@ export const sample_trips: Trip[] = [
         stars: 4.5,
         imageUrl: 'assets/Linh-Ung-Pagoda-Marble-Mountains-and-Hoi-An.webp',
         tag: ['Du lịch tâm linh'],
-        favorite: true,
         information:['Khám phá làng điêu khắc Non Nước',
                     'Thưởng lãm nét đẹp của Ngũ Hành Sơn',
                     'Tận hưởng nét đẹp kiến trúc hoà trộn giữa văn hoá bản địa và văn hoá Nhật, Hoa, và phương Tây tại phố cổ Hội An'],
@@ -268,6 +263,5 @@ export const sample_tags:Tag[] = [
     {name: 'Du lịch biển đảo'},
     {name: 'Du lịch nghỉ dưỡng'},
     {name: 'Du lịch tâm linh'},
-    {name: 'Du lịch mạo hiểm'},
-    {name: 'Du lịch văn hóa'},
+    
   ]
