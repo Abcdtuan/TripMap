@@ -1,0 +1,34 @@
+<div class="booking-section" *ngIf="combo">
+  <div class="notice">
+    <strong>Lưu ý:</strong> Không thể hoàn tiền và không thể đổi lịch cho các chuyến đi đã đặt.
+  </div>
+  <h3>Người lớn</h3>
+  <div>
+    <strong>{{ combo.options[0].price | number:'1.0-0' }} VND</strong>
+    <p>Trên {{ combo.options[0].note }}</p>
+    <div>
+      <button (click)="updateAdultCount(-1)">−</button>
+      <input type="text" [value]="adultCount" readonly>
+      <button (click)="updateAdultCount(1)">+</button>
+    </div>
+  </div>
+
+  <h3>Trẻ em</h3>
+  <div>
+    <strong>{{ combo.options[1].price | number:'1.0-0' }} VND</strong>
+    <p>{{ combo.options[1].note }}</p>
+    <div>
+      <button (click)="updateChildCount(-1)">−</button>
+      <input type="text" [value]="childCount" readonly>
+      <button (click)="updateChildCount(1)">+</button>
+    </div>
+  </div>
+
+  <hr />
+  <div>
+    <h3>Tổng giá tiền</h3>
+    <strong style="color: orange">{{ totalPrice | number:'1.0-0' }} VND</strong>
+  </div>
+
+  <button class="btn btn-primary" (click)="confirmBooking()">Đặt ngay</button>
+</div>

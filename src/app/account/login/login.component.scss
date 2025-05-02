@@ -51,3 +51,12 @@ p a {
 .error-message{
     color: rgb(222, 48, 48);
 }
+.alert {
+    background-color: #f23b2e;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 10px;
+    transition: opacity 0.5s ease-in-out;
+}

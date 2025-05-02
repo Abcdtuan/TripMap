@@ -1,0 +1,78 @@
+<div class="trip-form">
+    <h2 class="trip-form__title">Cập nhật chuyến đi</h2>
+    <div class="trip-form__image-preview" *ngIf="existingImages">
+      <img [src]="existingImages" alt="Ảnh chuyến đi" style="max-width:200px;">
+    </div>
+    <form [formGroup]="updateForm" (ngSubmit)="submitForm()">
+ 
+      <input type="file" class="trip-form__file" (change)="onFileSelected($event)" accept="image/*">
+      <!-- Thông tin cơ bản -->
+      <div class="trip-form__label">Tên chuyến đi</div>
+      <input type="text" formControlName="name" class="trip-form__input">
+  
+      <div class="trip-form__label">Giá tiền</div>
+      <input type="number" formControlName="price" class="trip-form__input">
+  
+      <div class="trip-form__label">Thông tin</div>
+      <textarea formControlName="information" class="trip-form__textarea"></textarea>
+  
+      <!-- Lịch trình -->
+      <div formArrayName="schedule" class="trip-form__add-section">
+        <h3>Lịch trình</h3>
+        <div *ngFor="let schedule of scheduleArray.controls; let i = index" [formGroupName]="i" class="schedule-item">
+          <div class="trip-form__label">Từ</div>
+          <input type="time" formControlName="from" class="trip-form__input">
+          <div class="trip-form__label">Đến</div>
+          <input type="time" formControlName="to" class="trip-form__input">
+          <div class="trip-form__label">Hoạt động</div>
+          <input type="text" formControlName="activity" class="trip-form__input">
+          <button type="button" class="trip-form__btn trip-form__btn--remove" (click)="removeSchedule(i)">Xóa</button>
+        </div>
+        <button type="button" class="trip-form__btn" (click)="addSchedule()">+ Thêm lịch trình</button>
+      </div>
+  
+      <!-- Combo -->
+      <div formArrayName="combos" class="trip-form__add-section">
+        <h3>Combo tour</h3>
+        <div *ngFor="let combo of combosArray.controls; let i = index" [formGroupName]="i" class="combo-item">
+          <div class="trip-form__label">Tên combo</div>
+          <input type="text" formControlName="name" class="trip-form__input">
+          <div class="trip-form__label">Giá</div>
+          <input type="number" formControlName="price" class="trip-form__input">
+          <div class="trip-form__label">Mô tả</div>
+          <input type="text" formControlName="description" class="trip-form__input">
+          <!-- Options -->
+          <div formArrayName="options" class="trip-form__add-section">
+            <h4>Tùy chọn</h4>
+            <div *ngFor="let option of getComboOptions(i).controls; let j = index" [formGroupName]="j" class="option-item">
+              <div class="trip-form__label">Loại</div>
+              <input type="text" formControlName="type" class="trip-form__input">
+              <div class="trip-form__label">Giá</div>
+              <input type="number" formControlName="price" class="trip-form__input">
+              <div class="trip-form__label">Ghi chú</div>
+              <input type="text" formControlName="note" class="trip-form__input">
+              <button type="button" class="trip-form__btn trip-form__btn--remove" (click)="removeComboOption(i, j)">Xóa tùy chọn</button>
+            </div>
+            <button type="button" class="trip-form__btn" (click)="addComboOption(i)">+ Thêm tùy chọn</button>
+          </div>
+          <button type="button" class="trip-form__btn trip-form__btn--remove" (click)="removeCombo(i)">Xóa combo</button>
+        </div>
+        <button type="button" class="trip-form__btn" (click)="addCombo()">+ Thêm combo</button>
+      </div>
+      <div class="trip-form__label">Thể loại</div>
+      <select formControlName="tag" class="trip-form__select">
+        <option *ngFor="let tag of listOfTags" [ngValue]="tag">{{tag}}</option>
+      </select>
+  
+      <div class="trip-form__label">Điểm xuất phát</div>
+      <select formControlName="origin" class="trip-form__select">
+        <option *ngFor="let origin of listOfOrigins" [ngValue]="origin">{{origin}}</option>
+      </select>
+      
+      <!-- Nút hành động -->
+      <div class="trip-form__buttons">
+        <button type="submit" class="trip-form__submit"   >Cập nhật</button>
+        <button type="button" class="trip-form__cancel" routerLink="/admin/dashboard">Hủy</button>
+      </div>
+    </form>
+  </div>

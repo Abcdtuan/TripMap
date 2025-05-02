@@ -33,32 +33,42 @@ export class LoginComponent {
 
   
   }
-  login(){
-    console.log(this.loginForm.value)
-    this.authService.login(this.loginForm.value).subscribe((res) => {
-      console.log(res);
-      if(res.userId != null){
-        const user = {
-          id: res.userId,
-          role:res.userRole
-        };
-        StorageService.saveUser(user);
-        StorageService.saveToken(res.jwt);
-        if(StorageService.isAdminLoggedIn()){
-          this.router.navigateByUrl("/admin/dashboard");
-        }else if(StorageService.isCustomerLoggedIn()){
-          this.router.navigateByUrl("/customer/dashboard");
-        }else{
-          this.message = ("Tên đăng nhập hoặc mật khẩu đúng");
-          setTimeout(() => {
-            this.message = "";
-          }, 5000); 
-          
+  login() {
+    console.log(this.loginForm.value);
+    this.isSpinning = true;
+  
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.isSpinning = false;
+  
+        if (res.userId != null) {
+          const user = {
+            id: res.userId,
+            role: res.userRole
+          };
+          StorageService.saveUser(user);
+          StorageService.saveToken(res.jwt);
+  
+          if (StorageService.isAdminLoggedIn()) {
+            this.router.navigateByUrl("/admin/dashboard");
+          } else if (StorageService.isCustomerLoggedIn()) {
+            this.router.navigateByUrl("/customer/dashboard");
+          }
         }
-    }
-  })
-
+      },
+      error: (err: any) => {
+        this.isSpinning = false;
+        console.error("Đăng nhập thất bại:", err);
+        this.message = "Tên đăng nhập hoặc mật khẩu không đúng!";
+        if (err.error?.message) {
+          this.message += " (" + err.error.message + ")";
+        }
+        setTimeout(() => this.message = "", 3000);
+      }
+    });
   }
+  
 
    
 }

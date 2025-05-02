@@ -1,6 +1,6 @@
 import { FavoriteService } from './../../services/trip/favorite.service';
 import { Component } from '@angular/core';
-import { Trip } from '../../shared/models/Trip';
+import { Combo, ComboOption, Trip } from '../../shared/models/Trip';
 import { TripService } from '../../services/trip/trip.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,17 +9,20 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { NotFoundComponent } from '../../not-found/not-found.component';
 import { NgIf } from '@angular/common';
+import { TicketSelectorComponent } from '../../ticket-selector/ticket-selector.component';
 
 
 @Component({
   selector: 'app-trip-page',
   standalone: true,
-  imports: [MatIconModule,NgIf, NotFoundComponent, StarRatingComponent, CommonModule, RouterLink],
+  imports: [MatIconModule,NgIf, NotFoundComponent, StarRatingComponent, CommonModule, RouterLink, TicketSelectorComponent],
   templateUrl: './trip-page.component.html',
   styleUrl: './trip-page.component.scss'
 })
 export class TripPageComponent {
   trip!: Trip;
+  selectedCombo: any = null;
+  showTicketSelector: boolean = false;
   days: { date: Date; label: string }[] = [];
   selectedDate: Date | null = null;
   constructor(activatedRoute:ActivatedRoute, tripService:TripService,private favoriteService:FavoriteService,private router: Router ) {
@@ -30,6 +33,7 @@ export class TripPageComponent {
         this.generateDays();
       }
     })
+    
   }
   generateDays() {
     const today = new Date();
@@ -54,11 +58,22 @@ export class TripPageComponent {
       return;
     }
     console.log(`Đặt vé: ${combo.name} vào ngày ${this.selectedDate}`);
+    this.router.navigate(['/trip', this.trip.id, 'ticket-selector'], {
+      queryParams: {
+        comboId: combo.id,
+      }
+    });
   }
   addToFavorite() {
     this.favoriteService.addToFavorite(this.trip);
     this.router.navigateByUrl('/favorite-page');
     console.log("Đã thêm vào yêu thích, chuyển hướng...");
     this.router.navigateByUrl('/favorite-page')
+  }
+  getHighestPrice(combo: Combo): number | null {
+    if (combo && combo.options && combo.options.length > 0) {
+      return Math.max(...combo.options.map((option: ComboOption) => option.price));
+    }
+    return null; // Trả về null nếu không có giá
   }
 }

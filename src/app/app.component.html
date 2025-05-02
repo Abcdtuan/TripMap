@@ -11,7 +11,17 @@
                 <li><a  routerLink="/" [queryParams]="{ tag: 'Du lịch nghỉ dưỡng' }">Du lịch nghỉ dưỡng</a></li>
                 <li><a  routerLink="/" [queryParams]="{ tag: 'Du lịch tâm linh' }">Du lịch tâm linh</a></li>
                 <li><a  routerLink="/">Điểm đến</a></li>
+                <li class="dropdown">
+                    <a href="#">Điểm đến</a>
+                    <ul class="dropdown-menu">
+                      <li><a routerLink="/" [queryParams]="{ origin: 'Quảng Ninh' }">Quảng Ninh</a></li>
+                      <li><a routerLink="/" [queryParams]="{ origin: 'Nha Trang' }">Nha Trang</a></li>
+                      <li><a routerLink="/" [queryParams]="{ origin: 'Hội An' }">Hội An</a></li>
+                      <li><a routerLink="/" [queryParams]="{ origin: 'Đà Nẵng' }">Đà Nẵng</a></li>
+                    </ul>
+                </li>
             </ul>
+            
         </div>
         <div class="left">
             <div class="searchbox">

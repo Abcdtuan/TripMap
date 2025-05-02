@@ -18,7 +18,7 @@
             </star-rating>
         </div>
         <div class="origins">
-            <span *ngFor="let origin of trip.origins">
+            <span *ngFor="let origin of trip.origin">
                 {{ origin }}
             </span>
         </div>
@@ -74,7 +74,7 @@
                 {{ desc }}
             </li>
         </ul>
-          <span class="price">{{ combo.price | currency:'VND' }}</span>
+          <span class="price">{{ getHighestPrice(combo)| currency:'VND' }}</span>
           <button [disabled]="!selectedDate" (click)="bookTicket(combo)" class="book-button">
             Chọn vé
           </button>

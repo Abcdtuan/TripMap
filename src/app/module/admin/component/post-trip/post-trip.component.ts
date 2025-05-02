@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Va
 import { CommonModule } from '@angular/common';
 import { AdminService } from '../../services/admin.service';
 import { Router } from '@angular/router';
-import { error } from 'console';
 @Component({
   selector: 'app-post-trip',
   standalone: true,
@@ -19,12 +18,8 @@ export class PostTripComponent  {
   postTripForm!: FormGroup;
 
   listOfTags: string[] = ['Du lịch biển đảo', 'Du lịch trải nghiệm', 'Du lịch nghỉ dưỡng', 'Du lịch tâm linh', 'Công viên giải trí'];
-  listOfOrigins: string[] = ['Quảng Ninh', 'Nha TRang', 'Hội An', 'Đà Nẵng'];
+  listOfOrigins: string[] = ['Quảng Ninh', 'Nha Trang', 'Hội An', 'Đà Nẵng'];
 
-  showAddTag = false;
-  newTag = '';
-  showAddOrigin = false;
-  newOrigin = '';
   message: string = "";
 
   constructor(private fb: FormBuilder, private adminService:AdminService, private router:Router) {}
@@ -32,11 +27,10 @@ export class PostTripComponent  {
   ngOnInit(): void {
     this.postTripForm = this.fb.group({
       name: ['', Validators.required],
-      price: [0, Validators.required],
-      stars: [0, [Validators.required, Validators.min(0), Validators.max(5)]],
+      price: [0, [Validators.required,Validators.min(0)]],
       information: [''],
-      tag: ['', Validators.required],
-      origin: ['', Validators.required],
+      tag: [[], Validators.required],
+      origin: [[], Validators.required],
       schedule: this.fb.array([
         this.fb.group({
           from: ['', Validators.required],
@@ -48,7 +42,14 @@ export class PostTripComponent  {
         this.fb.group({
           name: [''],
           price: [0],
-          description: ['']
+          description: [''],
+          options: this.fb.array([
+            this.fb.group({
+              type: [''],
+              price: [0],
+              note: ['']
+            })
+          ])
         })
       ])
     });
@@ -58,16 +59,19 @@ export class PostTripComponent  {
     this.isSpinning = true;
     const formData: FormData = new FormData();
     if (this.selectedFile) {
-      formData.append('img', this.selectedFile);
+      formData.append('image', this.selectedFile);
     }
     formData.append('name', this.postTripForm.get('name')!.value);
     formData.append('price', this.postTripForm.get('price')!.value.toString());
-    formData.append('stars', this.postTripForm.get('stars')!.value.toString());
     formData.append('information', this.postTripForm.get('information')!.value);
-    formData.append('tag', this.postTripForm.get('tag')!.value);
-    formData.append('origin', this.postTripForm.get('origin')!.value);
+    formData.append('tag', JSON.stringify(this.postTripForm.get('tag')!.value));
+    formData.append('origin', JSON.stringify(this.postTripForm.get('origin')!.value));
     formData.append('schedule', JSON.stringify(this.postTripForm.value.schedule));
-    formData.append('combos', JSON.stringify(this.postTripForm.value.combos));
+    const combos = this.postTripForm.value.combos.map((combo: any) => ({
+      ...combo,
+      options: combo.options.filter((option: any) => (option.type ?? '').trim() !== '')
+    }));
+    formData.append('combos', JSON.stringify(combos));
     console.log(formData)
     this.adminService.postTrip(formData).subscribe({
       next: (res) => {
@@ -110,31 +114,36 @@ export class PostTripComponent  {
     this.combos.push(this.fb.group({
       name: [''],
       price: [0],
-      description: ['']
+      description: [''],
+      options: this.fb.array([
+        this.fb.group({
+          type: [''],
+          price: [0],
+          note: ['']
+        })
+      ])
     }));
   }
 
   removeCombo(index: number): void {
     this.combos.removeAt(index);
   }
-
-  addNewTag() {
-    if (this.newTag && !this.listOfTags.includes(this.newTag)) {
-      this.listOfTags.push(this.newTag);
-      this.postTripForm.patchValue({ tag: this.newTag });
-      this.newTag = '';
-      this.showAddTag = false;
-    }
+  getComboOptions(comboIndex: number): FormArray {
+    return (this.combos.at(comboIndex) as FormGroup).get('options') as FormArray;
+  }
+  
+  addComboOption(comboIndex: number): void {
+    this.getComboOptions(comboIndex).push(this.fb.group({
+      label: [''],
+      price: [0],
+      note: ['']
+    }));
+  }
+  
+  removeComboOption(comboIndex: number, optionIndex: number): void {
+    this.getComboOptions(comboIndex).removeAt(optionIndex);
   }
 
-  addNewOrigin() {
-    if (this.newOrigin && !this.listOfOrigins.includes(this.newOrigin)) {
-      this.listOfOrigins.push(this.newOrigin);
-      this.postTripForm.patchValue({ origin: this.newOrigin });
-      this.newOrigin = '';
-      this.showAddOrigin = false;
-    }
-  }
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];

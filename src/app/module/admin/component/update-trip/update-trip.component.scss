@@ -1,0 +1,110 @@
+.trip-form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+    
+  }
+  
+  .trip-form__title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .trip-form__label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+  }
+  
+  .trip-form__input,
+  .trip-form__select,
+  .trip-form__textarea,
+  .trip-form__file {
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .trip-form__textarea {
+    min-height: 60px;
+  }
+  
+  .trip-form__btn {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  .trip-form__btn--remove {
+    background-color: #dc3545;
+    margin-left: 10px;
+  }
+  
+  .trip-form__btn:hover {
+    opacity: 0.9;
+  }
+  .trip-form__buttons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  
+  .trip-form__submit {
+    flex: 2;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+  .trip-form__cancel {
+    flex: 1;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  
+    &:hover {
+      background-color: #c82333;
+    }
+  }
+  
+  .trip-form__submit:hover {
+    background-color: #0056b3;
+  }
+  .trip-form__add-section {
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+  .trip-form__image-preview {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+  .trip-form__image-preview img {
+    max-width: 220px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  

@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StarRatingComponent } from "../star-rating/star-rating.component";
 import { RouterModule } from '@angular/router';
 import { NotFoundComponent } from '../not-found/not-found.component';
+import e from 'express';
 
 @Component({
   selector: 'app-home',
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit {
     this.route.queryParams.subscribe(params => { 
       const searchTerm = params['searchTerm']?.trim();
       const tag = params['tag'];
+      const origin = params['origin'];
       if (searchTerm) {
         const normalizedSearchTerm = this.normalizeString(searchTerm);
         this.trips = this.allTrips.filter(trip => 
@@ -36,6 +38,9 @@ export class HomeComponent implements OnInit {
       } 
       else if (tag) {
         this.trips = this.tripservice.getAllTripsByTag(tag);
+      }
+      else if (origin) {
+        this.trips = this.tripservice.getAllTripsByOrigin(origin);
       }
       else {
         this.trips = this.allTrips;

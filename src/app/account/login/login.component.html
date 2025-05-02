@@ -28,7 +28,7 @@
     <button type="submit" [disabled]="loginForm.invalid"> Đăng nhập</button>
     <div>
         <p><a routerLink="/account/register">Đăng ký</a></p>
-        <p><a routerLink="">Quên mật khẩu?</a></p>
     </div>
+    <div *ngIf="message" class="alert"> {{message}}</div>
     
 </form>

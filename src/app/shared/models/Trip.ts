@@ -5,12 +5,24 @@ export class Trip{
     tag:string[] = [];
     stars: number = 0;
     imageUrl!:string;
-    origins!:string[];
+    origin!:string[];
     information!:string[];
     schedule?: ScheduleItem[];
-    combos?: { name: string; price: number; description: string[] }[]; 
+    combos?: Combo[];
 }
 export interface ScheduleItem {
     time: string;
     activity: string[];
 }
+export interface ComboOption {
+    label: string;            
+    price: number;           
+    originalPrice?: number;           
+    note?: string;            
+}
+export interface Combo {
+    id: number; 
+    name: string;
+    options: ComboOption[];
+    description: string[];
+  }

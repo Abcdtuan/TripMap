@@ -1,3 +1,4 @@
+import { Origin } from "./app/shared/models/origin";
 import { Tag } from "./app/shared/models/tag";
 import { Trip } from "./app/shared/models/Trip";
 export const sample_trips: Trip[] = [
@@ -5,7 +6,7 @@ export const sample_trips: Trip[] = [
         id: 1,
         name: 'Cầu vàng',
         price: 927000,
-        origins: ['Đà nẵng'],
+        origin: ['Đà Nẵng'],
         stars: 5,
         imageUrl: 'assets/Sun-World-Ba-Na-Hills-in-Da-.webp',
         tag: ['Du lịch trải nghiệm'],
@@ -13,24 +14,50 @@ export const sample_trips: Trip[] = [
         schedule: [
       ],
       combos: [
-        {name: 'Vé vào cửa + Bà Nà Brew House', 
-        price: 927000 ,
+        {
+        id: 1,
+        name: 'Vé vào cửa + Bà Nà Brew House', 
         description: [
           '1 vé vào cửa Bà Nà Hills',
           'Cáp treo khứ hồi',
           'Vé vào cửa Bà Nà Brew House'
+        ],
+        options: [
+          {
+            label: "Người lớn",
+            price: 927000,
+            note: "Trên 140 cm"
+          },
+          {
+            label: "Trẻ em",
+            price: 446500,
+            note: "100 - 140 cm"
+          }
         ]
         },
         {
+          id: 2,
           name: 'COMBO: Vé vào cửa & Bana Brew House & Vé xe shuttle bus khứ hồi từ Đà Nẵng', 
-          price: 1086000 ,
           description: [
             'Vé cáp treo khứ hồi dành cho 1 khách',
             'Vé vào cổng Bana Brew House (Khách trên 18 tuổi được thưởng thức Sun KraftBeer sản xuất độc quyền tại Bà Nà',
             'Vé tàu hỏa leo núi dành cho 1 khách',
             'Vé vào cổng Bà Nà Hills dành cho 1 khách',
             'Vé chơi trò chơi trong khu vui chơi giải trí Fantasy Park dành cho 1 khách',
+          ],
+          options: [
+            {
+              label: "Người lớn",
+              price: 1087000,
+              note: "Trên 140 cm"
+            },
+            {
+              label: "Trẻ em",
+              price: 800000,
+              note: "100 - 140 cm"
+            }
           ]
+
         }
         ]
       },
@@ -38,7 +65,7 @@ export const sample_trips: Trip[] = [
         id: 2,
         name: 'Hòn mun',
         price: 874000,
-        origins: ['Nha trang'],
+        origin: ['Nha Trang'],
         stars: 4.8,
         imageUrl: 'assets/TTC-Doc-Let-Beach-Tiny-Zoo-Nha-Trang.webp',
         tag: ['Du lịch biển đảo'],
@@ -61,8 +88,8 @@ export const sample_trips: Trip[] = [
         ],
         combos:[
          {
+          id: 1,
           name: 'Tour ghép - Khởi hành thành phố Nha Trang ', 
-          price: 874000 ,
           description: [
             'Hướng dẫn viên đi theo đoàn',
             '1x Bữa trưa,1x Chai nước suối',
@@ -70,11 +97,23 @@ export const sample_trips: Trip[] = [
             'Tàu cano/ thuyền di chuyển trong tour',
             'Vé vào cửa các điểm tham quan',
             'Dịch vụ tắm bùn Hòn Tằm'
+          ],
+          options: [
+            {
+              label: "Người lớn",
+              price: 874000,
+              note: "Trên 9 tuổi"
+            },
+            {
+              label: "Trẻ em",
+              price: 737000,
+              note: "5-9 tuổi"
+            }
           ]
          },
          {
+          id: 2,
           name: 'Tour ghép - Khởi hành thành phố Nha Trang ', 
-          price: 920000 ,
           description: [
             'Hướng dẫn viên đi theo đoàn',
             '1x Bữa trưa,1x Chai nước suối',
@@ -83,15 +122,27 @@ export const sample_trips: Trip[] = [
             'Vé vào cửa các điểm tham quan',
             'Dịch vụ tắm bùn Hòn Tằm  Resort',
             'Bảo hiểm du lịch'
+          ],
+          options: [
+            {
+              label: "Người lớn",
+              price: 920000,
+              note: "Trên 9 tuổi "
+            },
+            {
+              label: "Trẻ em",
+              price: 810000,
+              note: "5-9 tuổi"
+            }
           ]
          }
         ]
       },
       {
-        id: 3,
+        id: 5,
         name: 'Vịnh hạ long trên du thuyền',
         price: 6312000,
-        origins: ['Quảng ninh'],
+        origin: ['Quảng Ninh'],
         stars: 2,
         imageUrl: 'assets/images1.jpg',
         tag: ['Du lịch trải nghiệm',
@@ -119,8 +170,8 @@ export const sample_trips: Trip[] = [
         ],
         combos: [
          {
+          id: 6,
           name: 'Tour ghép trên tàu Sea Star - Khởi hành tại Hạ Long', 
-          price: 6312000 ,
           description: [
             'Phòng cabin cho 2 khách trên tàu',
             '1 bữa trưa và 1 bữa trưa nhẹ, 1 bữa tối 1 bữa sáng nhẹ, 1 nước ép trái cây, Nước uống, Trái cây',
@@ -128,11 +179,23 @@ export const sample_trips: Trip[] = [
             'Hướng dẫn viên tiếng Anh',
             'Vé vào cửa,Vé chèo kayak',
             'Lớp võ Thái cực quyền và lớp học nấu ăn',
+          ],
+          options: [
+            {
+              label: "Người lớn",
+              price: 6312000,
+              note: "trên 13 tuổi"
+            },
+            {
+              label: "Trẻ em",
+              price: 5130000,
+              note: "4-13 tuổi"
+            }
           ]
          },
          {
+          id: 7,
           name: 'Tour ghép trên tàu Sea Star - Khởi hành tại Hà Nội', 
-          price: 7062000,
           description: [
             'Vé xe limousine đưa đón khứ hồi Hà Nội - Hạ Long',
             'Phòng cabin cho 2 khách trên tàu',
@@ -141,16 +204,28 @@ export const sample_trips: Trip[] = [
             'Hướng dẫn viên tiếng Anh',
             'Vé vào cửa,Vé chèo kayak',
             'Lớp võ Thái cực quyền và lớp học nấu ăn',
+          ],
+          options: [
+            {
+              label: "Người lớn",
+              price: 7080000,
+              note: "Trên 13 tuổi"
+            },
+            {
+              label: "Trẻ em",
+              price: 446500,
+              note: "4-13 tuổi"
+            }
           ]
          }
        ]
       
       },
       {
-        id: 4,
+        id: 8,
         name: 'Vé tắm bùn khoáng nha trang',
         price: 433000,
-        origins: ['Nha trang'],
+        origin: ['Nha Trang'],
         stars: 4.2,
         imageUrl: 'assets/Hon-Tam-Nha-Trang.webp',
         tag: ['Du lịch nghỉ dưỡng'],
@@ -160,8 +235,9 @@ export const sample_trips: Trip[] = [
         ],
         combos: [
         {
+          id: 4,
           name: 'COMBO: Vé vào cửa Khu B & Vé tàu cao tốc khứ hồi & Ăn trưa',  
-          price: 745000,
+          
           description: [
             'Ăn trưa tại Resort Hòn Tằm (buffet hoặc set menu, tùy theo tình trạng sẵn có)',
             'Đưa đón khứ hồi bằng tàu cao tốc từ Thành phố Nha Trang (cảng khách sạn 6 sao Vinpearl) đến Khu nghỉ dưỡng Hòn Tằm cho 1 du khách',
@@ -169,17 +245,41 @@ export const sample_trips: Trip[] = [
             'Biểu diễn âm nhạc và khiêu vũ',
             'Vé vào bãi biển Hòn Tằm Khu B tại Khu nghỉ dưỡng Hòn Tằm',
             'Thuê khăn tắm và đồ bơi (cần đặt cọc) tại Hon Tam Resort',
+          ],
+          options: [
+            {
+              label: "Người lớn",
+              price: 745000,
+              note: "Trên 140 cm"
+            },
+            {
+              label: "Trẻ em",
+              price: 645000,
+              note: "100 - 140 cm"
+            }
           ]
         },
         {
+          id: 9,
           name: 'COMBO: Vé vào cửa Khu B & Vé tàu cao tốc khứ hồi', 
-          price: 433000,
           description: [
             'Đưa đón khứ hồi bằng tàu cao tốc từ Thành phố Nha Trang (cảng khách sạn 6 sao Vinpearl) đến Khu nghỉ dưỡng Hòn Tằm cho 1 du khách',
             'Vé vào cửa Khu du lịch Hòn Tằm B cho 1 du khách',
             'Biểu diễn âm nhạc và khiêu vũ',
             'Vé vào bãi biển Hòn Tằm Khu B tại Khu nghỉ dưỡng Hòn Tằm',
             'Thuê khăn tắm và đồ bơi (cần đặt cọc) tại Hon Tam Resort',
+          ],
+          options: [
+            {
+              label: "Người lớn",
+              price: 433000,
+              note: "Trên 140 cm"
+            },
+            {
+              label: "Trẻ em",
+              price: 400000,
+              note: "100 - 140 cm"
+            }
           ]
         }
         ]
@@ -189,7 +289,7 @@ export const sample_trips: Trip[] = [
         id: 5,
         name: 'Vé tham quan rừng dừa Bảy mẫu',
         price: 80000,
-        origins: ['Hội an'],
+        origin: ['Hội An'],
         stars: 4.5,
         imageUrl: 'assets/Coconut-Jungle-Basket-Boat-Ride.webp',
         tag: ['Du lịch trải nghiệm'],
@@ -200,24 +300,48 @@ export const sample_trips: Trip[] = [
         ],
         combos: [
         {
+          id: 10,
           name: 'Vé đi thuyền thúng', 
-          price: 80000 ,
           description: [
             'Tour tham quan rừng dừa bằng thuyền thúng 1 giờ cho 1 du khách',
             'Nhân viên nói tiếng Anh và tiếng Việt',
             'Vé vào cửa',
             'Màn nhào lộn thuyền thúng'
+          ],
+          options: [
+            {
+              label: "Người lớn",
+              price: 80000,
+              note: "Trên 140 cm"
+            },
+            {
+              label: "Trẻ em",
+              price: 50000,
+              note: "100 - 140 cm"
+            }
           ]
         },
         {
+          id: 5,
           name: 'Vé đi thuyền thúng', 
-          price: 355000 ,
           description: [
             'Tour tham quan rừng dừa bằng thuyền thúng 1 giờ cho 1 du khách',
             '1 suất ăn trưa dành cho 1 du khách tại nhà hàng địa phương',
             'Nhân viên nói tiếng Anh và tiếng Việt',
             'Vé vào cửa',
             'Màn nhào lộn thuyền thúng',
+          ],
+          options: [
+            {
+              label: "Người lớn",
+              price: 300000,
+              note: "Trên 140 cm"
+            },
+            {
+              label: "Trẻ em",
+              price: 200000,
+              note: "100 - 140 cm"
+            }
           ]
         }
        ]
@@ -226,7 +350,7 @@ export const sample_trips: Trip[] = [
         id: 6,
         name: 'Tour chùa Linh Ứng, Ngũ Hành Sơn',
         price: 433000,
-        origins: ['Hội an'],
+        origin: ['Hội An'],
         stars: 4.5,
         imageUrl: 'assets/Linh-Ung-Pagoda-Marble-Mountains-and-Hoi-An.webp',
         tag: ['Du lịch tâm linh'],
@@ -243,14 +367,26 @@ export const sample_trips: Trip[] = [
         ],
         combos: [
         {
+          id: 11,
           name: 'Tour ghép cho tối đa 30 khách (Công dân Việt Nam) - Khởi hành từ Đà Nẵng', 
-          price: 590000 ,
           description: [
             '1 bữa tối, 1 chai nước suối, Khách có thể đặt bữa chay',
             'Xe có máy điều hoà để đưa đón và trung chuyển',
             'Vé vào cổng các điểm tham quan',
             'Bảo hiểm du lịch',
             'Hướng dẫn viên nói tiếng Việt',
+          ],
+          options: [
+            {
+              label: "Người lớn",
+              price: 433000,
+              note: "Trên 140 cm"
+            },
+            {
+              label: "Trẻ em",
+              price: 300000,
+              note: "100 - 140 cm"
+            }
           ]
         },
         
@@ -265,3 +401,9 @@ export const sample_tags:Tag[] = [
     {name: 'Du lịch tâm linh'},
     
   ]
+export const sample_origins:Origin[] = [
+    {name: 'Đà nẵng'},
+    {name: 'Hội an'},
+    {name: 'Nha trang'},
+    {name: 'Quảng ninh'},
+]

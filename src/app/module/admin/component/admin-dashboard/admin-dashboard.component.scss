@@ -1,0 +1,183 @@
+.trip-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
+  
+  .trip-card {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    box-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.05),
+      0 4px 8px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 100%;
+    min-height: 200px;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.1),
+        0 8px 16px rgba(0, 0, 0, 0.1);
+      border-color: rgba(0, 149, 255, 0.2);
+    }
+  }
+  
+  .trip-card-content {
+    display: flex;
+    gap: 1rem;
+    height: 100%;
+    min-height: 200px;
+    border-radius: 8px;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 1)
+    );
+  }
+  
+  .trip-image {
+    width: 200px;
+    height: 100%;
+    min-height: 200px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .trip-info {
+    padding: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  
+    .trip-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #0095ff;
+      margin: 0 0 0.25rem 0;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+  
+    .trip-subtitle {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+  
+    hr {
+      border: none;
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.05),
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.05)
+      );
+      margin: 0.5rem 0;
+    }
+  
+    p {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #333;
+      margin: 0.25rem 0;
+      font-size: 0.9rem;
+  
+      &.price-info {
+        span {
+          color: #ff3838;
+          font-weight: 600;
+          font-size: 1.1rem;
+          text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+      }
+  
+      strong {
+        color: #666;
+        min-width: 80px;
+        position: relative;
+        padding-right: 10px;
+  
+        &::after {
+          content: ':';
+          position: absolute;
+          right: 0;
+          color: #999;
+        }
+      }
+    }
+    .button-group {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        justify-content: flex-end;
+      }
+      
+      .update-btn,
+      .delete-btn {
+        padding: 6px 16px;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+      
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+      
+      .update-btn {
+        background-color: #0095ff;
+        color: white;
+        &:hover {
+            background-color: #007acc; 
+          }
+      }
+      
+      .delete-btn {
+        background-color: #ff4757;
+        color: white;
+        &:hover {
+            background-color: #d31026; // Màu đỏ đậm hơn khi hover
+          }
+      }
+  }
+  
+  @media (max-width: 600px) {
+    .trip-card-content {
+      flex-direction: column;
+    }
+    .trip-card {
+        min-height: 300px; // Điều chỉnh chiều cao tối thiểu cho mobile
+      }
+  
+    .trip-image {
+        min-height: 150px;
+      height: 150px;
+    }
+  
+    .trip-info {
+      padding: 0.75rem;
+  
+      .trip-title {
+        font-size: 1.2rem;
+      }
+  
+      p.price-info span {
+        font-size: 1rem;
+      }
+    }
+  }

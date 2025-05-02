@@ -2,14 +2,16 @@
 
   <h2 class="trip-form__title">Đăng chuyến đi</h2>
 
+  <div *ngIf="imagePreview" class="trip-form__image-preview">
+    <img [src]="imagePreview" alt="Preview" style="max-width: 200px;">
+  </div>
+  <input type="file" class="trip-form__file" (change)="onFileSelected($event)"/>
+
   <label class="trip-form__label">Tên chuyến đi:</label>
   <input type="text" formControlName="name" class="trip-form__input" />
 
   <label class="trip-form__label">Giá:</label>
-  <input type="number" formControlName="price" class="trip-form__input" />
-
-  <label class="trip-form__label">Số sao:</label>
-  <input type="number" formControlName="stars" min="0" max="5" class="trip-form__input" placeholder="Nhập số sao (0 - 5)" />
+  <input type="number" formControlName="price" class="trip-form__input"  min="0"/>
 
   <label class="trip-form__label">Thông tin:</label>
   <textarea formControlName="information" class="trip-form__textarea"></textarea>
@@ -31,8 +33,18 @@
   <div formArrayName="combos" class="trip-form__combos">
     <div *ngFor="let c of combos.controls; let i = index" [formGroupName]="i" class="trip-form__combo-item">
       <input type="text" formControlName="name" placeholder="Tên combo" class="trip-form__input" />
-      <input type="number" formControlName="price" placeholder="Giá" class="trip-form__input" />
+      <input type="number" formControlName="price" placeholder="Giá" class="trip-form__input" min="0"/>
       <input type="text" formControlName="description" placeholder="Mô tả" class="trip-form__input" />
+      <!-- ComboOptions (nằm trong mỗi Combo) -->
+    <div formArrayName="options" class="trip-form__combo-options">
+      <div *ngFor="let opt of getComboOptions(i).controls; let j = index" [formGroupName]="j" class="trip-form__combo-option">
+        <input type="text" formControlName="type" placeholder="Loại vé (VD: Người lớn)" class="trip-form__input" />
+        <input type="number" formControlName="price" placeholder="Giá vé" class="trip-form__input" min="0" />
+        <input type="text" formControlName="note" placeholder="Ghi chú (nếu có)" class="trip-form__input" />
+        <button type="button" (click)="removeComboOption(i, j)" class="trip-form__btn trip-form__btn--remove">X</button>
+      </div>
+    </div>
+    <button type="button" (click)="addComboOption(i)" class="trip-form__btn">+ Thêm loại vé</button>
       <button type="button" (click)="removeCombo(i)" class="trip-form__btn trip-form__btn--remove">X</button>
     </div>
   </div>
@@ -48,11 +60,9 @@
   <select formControlName="origin" class="trip-form__select">
     <option *ngFor="let o of listOfOrigins" [value]="o">{{ o }}</option>
   </select>
-
-  <!-- Image -->
-  <label class="trip-form__label">Ảnh đại diện:</label>
-  <input type="file" class="trip-form__file" />
-
   <!-- Submit -->
-  <button type="submit" class="trip-form__submit">Đăng chuyến đi</button>
+   <div class="trip-form__buttons">
+    <button type="submit" class="trip-form__submit">Đăng chuyến đi</button>
+    <button type="button" class="trip-form__cancel" routerLink="/admin/dashboard">Hủy</button>
+  </div>
 </form>
