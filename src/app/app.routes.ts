@@ -8,6 +8,7 @@ import { FavoriteComponent } from './favorite/favorite.component';
 import { ProfileComponent } from './profile/profile.component';
 import { TransationComponent } from './transation/transation.component';
 import { TicketSelectorComponent } from './ticket-selector/ticket-selector.component';
+import { CompoOptionComponent } from './module/customer/component/compo-option/compo-option.component';
 
 export const routes: Routes = [
     {path:'',component:HomeComponent},

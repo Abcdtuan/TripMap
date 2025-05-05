@@ -1,0 +1,24 @@
+<div class="option-detail">
+    <div class="ticket-row">
+      <div>
+        <div class="ticket-type">{{ type | uppercase }}</div>
+        <div class="ticket-price">{{ price | number }} VND</div>
+        <div class="ticket-note">{{ note }}</div>
+      </div>
+      <div class="quantity-group">
+        <button (click)="decrease()" [disabled]="quantity === 0">-</button>
+        <input type="text" [value]="quantity" readonly>
+        <button (click)="increase()">+</button>
+      </div>
+    </div>
+  
+    <hr>
+  
+    <div class="total-row">
+      <div>
+        <div class="total-label">Tổng giá tiền</div>
+        <div class="total-price">{{ total | number }} VND</div>
+      </div>
+      <button class="order-btn">Đặt ngay</button>
+    </div>
+  </div>

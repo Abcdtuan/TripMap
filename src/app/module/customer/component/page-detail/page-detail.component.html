@@ -1,0 +1,48 @@
+<div class="container" *ngIf="trip">
+    <img [src]="trip.processedImg" [alt]="trip.name" class="hero-image">
+
+    <div class="detail">
+        <h1 class="title">{{ trip.name }}</h1>
+       
+
+        <div class="location">{{ trip.origin }}</div>
+        <div class="tag">{{ trip.tag }}</div>
+        
+        <div class="price">₫{{ trip.price | number }}</div>
+        
+        <button class="favorite-btn">Thêm vào yêu thích</button>
+
+        <div class="description">
+            {{trip.information}}
+        </div>
+
+        <div class="schedule-section">
+            <h2 class="section-title">LỊCH TRÌNH</h2>
+            
+            <div class="schedule-dates">
+                <button class="date-btn active">4 thg 5</button>
+                <button class="date-btn">5 thg 5</button>
+                <button class="date-btn">6 thg 5</button>
+                <button class="date-btn">7 thg 5</button>
+                <button class="date-btn">8 thg 5</button>
+            </div>
+
+            <div class="ticket-combo" *ngFor="let combo of trip.combos">
+                <div class="combo-header">
+                  <h3>{{combo.name}}</h3>
+                  <div class="combo-price">₫{{combo.price | number}}</div>
+                </div>
+                
+                <ul class="combo-features">
+                  <li *ngFor="let desc of combo.description.split(',')">{{desc}}</li>
+                </ul>
+                
+                <button class="book-btn" *ngIf="combo.options?.length"
+                (click)="goToComboOption(combo.options[0])">Chọn vé</button>
+              </div>
+            
+              <!-- Combo Options Dialog -->
+              
+        </div>
+    </div>
+</div>

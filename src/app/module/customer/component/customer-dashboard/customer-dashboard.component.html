@@ -1,1 +1,27 @@
-<p>customer-dashboard works!</p>
+<div class="dashboard">
+    <div class="slide">
+      <img src="assets/pexels-nurseryart-346885.jpg" alt="slide" />
+    </div>
+    
+    <div class="trip-list">
+      <div class="trip-card" *ngFor="let trip of trips">
+        <div class="trip-card-content">
+          <img [src]="trip.processedImg" alt="{{trip.name}}" class="trip-image">
+  
+          <div class="trip-info">
+            <h2 class="trip-title">{{ trip.name }}</h2>
+            <p class="trip-subtitle">{{ trip.tag }}</p>
+            <hr>
+            <p><strong>Xuất phát:</strong> {{ trip.origin }}</p>
+            <p class="price-info">
+              <strong>Giá tiền:</strong> 
+              <span>{{ trip.price | number }}₫</span>
+            </p>
+            <div class="button-group">
+              <button class="view-btn" routerLink = "/customer/page-details/{{trip.id}}" >Xem chi tiết</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

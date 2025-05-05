@@ -1,0 +1,184 @@
+.dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  
+    .slide {
+      width: 100%;
+      height: 400px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      overflow: hidden;
+      
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+  
+  .trip-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .trip-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.2s;
+  
+    &:hover {
+      transform: translateY(-4px);
+    }
+  }
+  
+  .trip-card-content {
+    .trip-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+  }
+  
+  .trip-info {
+    padding: 16px;
+  
+    .trip-title {
+      margin: 0 0 8px;
+      font-size: 1.25rem;
+      color: #333;
+    }
+  
+    .trip-subtitle {
+      color: #666;
+      margin-bottom: 12px;
+    }
+  
+    hr {
+      margin: 12px 0;
+      border: none;
+      border-top: 1px solid #eee;
+    }
+  
+    .price-info {
+      margin: 12px 0;
+      color: #e44d26;
+      font-size: 1.1rem;
+    }
+  
+    .button-group {
+      margin-top: 16px;
+      
+      .view-btn {
+        width: 100%;
+        padding: 8px 16px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.2s;
+  
+        &:hover {
+          background: #0056b3;
+        }
+      }
+    }
+  }
+// ...existing code...
+
+.combo-options-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.combo-options-dialog {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  
+  h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 20px;
+    padding-right: 40px;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    
+    &:hover {
+      color: #333;
+    }
+  }
+}
+
+.options-list {
+  .option-item {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid #eee;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .option-info {
+      flex: 1;
+      
+      .option-type {
+        font-weight: 500;
+        color: #333;
+        margin-bottom: 4px;
+      }
+      
+      .option-note {
+        font-size: 14px;
+        color: #666;
+      }
+    }
+
+    .option-price {
+      font-weight: bold;
+      color: #e74c3c;
+      margin: 0 16px;
+    }
+
+    .select-btn {
+      padding: 8px 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+
+      &:hover {
+        background: #0056b3;
+      }
+    }
+  }
+}
