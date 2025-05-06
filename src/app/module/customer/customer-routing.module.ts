@@ -12,6 +12,7 @@ const routes: Routes = [
   {path:'page-details/:id',component:PageDetailComponent},
   {path:'page-details/:id/combo-option',component:CompoOptionComponent},
   
+  
 ];
 
 @NgModule({

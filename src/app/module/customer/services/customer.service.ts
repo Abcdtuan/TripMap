@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StorageService } from '../../../services/storage.service';
 import { Observable } from 'rxjs';
+import { Tag } from '../../../shared/models/tag';
+import { sample_tags } from '../../../../data';
 
 const BASIC_URL = ["http://localhost:8080"];
 @Injectable({
@@ -27,5 +29,8 @@ export class CustomerService {
       'Authorization',
       'Bearer ' + StorageService.getToken()
     );
+  }
+  getAllTags(): Tag[] {
+    return sample_tags;
   }
 }
