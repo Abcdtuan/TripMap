@@ -245,6 +245,31 @@
       }
     }
   }
+  .schedule-list {
+    margin: 24px 0;
+  
+    .section-title {
+      font-size: 18px;
+      color: #ff6600;
+      margin-bottom: 12px;
+      font-weight: bold;
+    }
+    .schedule-item {
+      background: #f8f8f8;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+      .schedule-time {
+        color: #222;
+        font-weight: bold;
+        margin-bottom: 6px;
+      }
+      .schedule-activity {
+        color: #555;
+        font-size: 15px;
+      }
+    }
+  }
 
 @media (max-width: 768px) {
     .container {

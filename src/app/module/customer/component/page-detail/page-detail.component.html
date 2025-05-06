@@ -26,6 +26,13 @@
                 <button class="date-btn">7 thg 5</button>
                 <button class="date-btn">8 thg 5</button>
             </div>
+            <div class="schedule-list" *ngIf="trip.schedule?.length">
+              <h3 class="section-title">Chi tiết lịch trình</h3>
+              <div class="schedule-item" *ngFor="let item of trip.schedule">
+                <div class="schedule-time"><b>{{item.from}} - {{item.to}}</b></div>
+                <div class="schedule-activity">{{item.activity}}</div>
+              </div>
+            </div>
 
             <div class="ticket-combo" *ngFor="let combo of trip.combos">
                 <div class="combo-header">
