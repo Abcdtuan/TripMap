@@ -23,14 +23,16 @@ export class CustomerService {
       headers:this.createAuthorizationHeader()
     });
   }
+  getProfile():Observable<any>{
+    return this.http.get(BASIC_URL + '/api/customer/profile',{
+      headers:this.createAuthorizationHeader()
+    });
+  }
   createAuthorizationHeader(): HttpHeaders {
     let authHeaders: HttpHeaders = new HttpHeaders();
     return authHeaders.set(
       'Authorization',
       'Bearer ' + StorageService.getToken()
     );
-  }
-  getAllTags(): Tag[] {
-    return sample_tags;
   }
 }

@@ -32,7 +32,9 @@ export class UpdateTripComponent {
     'Quảng Ninh',
     'Nha Trang',
     'Hội An',
-    'Đà Nẵng'
+    'Đà Nẵng',
+    'Hà Nội',
+    'Hồ Chí Minh'
   ];
 
   constructor(

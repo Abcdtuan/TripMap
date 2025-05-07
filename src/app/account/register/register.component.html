@@ -1,6 +1,13 @@
 <form [formGroup]="registerForm" (submit)="register()" autocomplete="new-password">
     <h1>Đăng Ký</h1>
     <div class="form-control">
+        <label for="name">Họ và tên</label>
+        <input formControlName="name" id="name" autocomplete="name" type="text">
+        <div class="error-message" *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched">
+            <p *ngIf="registerForm.get('name')?.errors?.['required']">Họ và tên không được để trống!</p>
+        </div>
+    </div>
+    <div class="form-control">
         <label for="email">Email</label>
         <input formControlName="email" id="email" autocomplete="new-password" type="email">
         <div class="error-message" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
@@ -34,5 +41,5 @@
     </div>
     <div *ngIf="message" class="alert">
         {{ message }}
-      </div>
+    </div>
 </form>

@@ -18,7 +18,7 @@ export class PostTripComponent  {
   postTripForm!: FormGroup;
 
   listOfTags: string[] = ['Du lịch biển đảo', 'Du lịch trải nghiệm', 'Du lịch nghỉ dưỡng', 'Du lịch tâm linh', 'Công viên giải trí'];
-  listOfOrigins: string[] = ['Quảng Ninh', 'Nha Trang', 'Hội An', 'Đà Nẵng'];
+  listOfOrigins: string[] = ['Quảng Ninh', 'Nha Trang', 'Hội An', 'Đà Nẵng','Hà Nội', 'Hồ Chí Minh'];
 
   message: string = "";
 

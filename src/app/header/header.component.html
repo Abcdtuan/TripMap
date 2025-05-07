@@ -1,7 +1,7 @@
 
 <div class="header">
     <div class="shopName">
-        <h2><a href="#" routerLink="/">Tripmap</a></h2>
+        <h2><a href="#" routerLink="customer/customer-dashboard">Tripmap</a></h2>
     </div>
     <div class="header1">
         <ul class="list">
@@ -13,10 +13,13 @@
             <li class="dropdown">
                 <a href="#">Điểm đến</a>
                 <ul class="dropdown-menu">
-                  <li><a routerLink="" [queryParams]="{ origin: 'Quảng Ninh' }">Quảng Ninh</a></li>
-                  <li><a routerLink="/" [queryParams]="{ origin: 'Nha Trang' }">Nha Trang</a></li>
-                  <li><a routerLink="/" [queryParams]="{ origin: 'Hội An' }">Hội An</a></li>
-                  <li><a routerLink="/" [queryParams]="{ origin: 'Đà Nẵng' }">Đà Nẵng</a></li>
+                  <li><a routerLink="/customer/customer-dashboard" [queryParams]="{ origin: 'Quảng Ninh' }">Quảng Ninh</a></li>
+                  <li><a routerLink="/customer/customer-dashboard" [queryParams]="{ origin: 'Nha Trang' }">Nha Trang</a></li>
+                  <li><a routerLink="/customer/customer-dashboard" [queryParams]="{ origin: 'Hội An' }">Hội An</a></li>
+                  <li><a routerLink="/customer/customer-dashboard" [queryParams]="{ origin: 'Đà Nẵng' }">Đà Nẵng</a></li>
+                  <li><a routerLink="/customer/customer-dashboard" [queryParams]="{ origin: 'Hà Nội' }">Hà Nội</a></li>
+                  <li><a routerLink="/customer/customer-dashboard" [queryParams]="{ origin: 'Hồ CHí Minh' }">Hồ Chí Minh</a></li>
+
                 </ul>
             </li>
             
@@ -25,8 +28,8 @@
     <div class="left">
         <div class="searchbox">
             <input type="text" placeholder="Nhập từ khóa..." [(ngModel)]="searchTerm">
-            <button class="search-button" (click)="search()">Tìm kiếm</button>
-        </div>
+            <button class="search-button" [routerLink]="'/customer/customer-dashboard'" [queryParams]="{ searchTerm: searchTerm }">Tìm kiếm</button>
+          </div>
         <div class="menu-container">
             <a routerLink="/dashboard">Tuấn</a>
             <div class="menu"> 

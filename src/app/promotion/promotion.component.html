@@ -1,0 +1,11 @@
+<div class="wrapper">
+    <div class="card" *ngFor="let promotion of promotions">
+      <div class="image-wrapper">
+        <img [src]="promotion.image" [alt]="promotion.title" />
+      </div>
+      <h3 class="title">{{ promotion.title }}</h3>
+      <p class="description">{{ promotion.description }}</p>
+      <button class="btn">{{ promotion.buttonText }}</button>
+    </div>
+  </div>
+  

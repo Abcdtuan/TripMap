@@ -6,6 +6,7 @@ import { RouterLink } from '@angular/router';
 import { StorageService } from '../services/storage.service';
 import { FavoriteService } from '../services/trip/favorite.service';
 import { CommonModule } from '@angular/common';
+import { CustomerService } from '../module/customer/services/customer.service';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +19,7 @@ export class HeaderComponent {
   
   searchTerm: string = '';
   favoriteCount = 0;
-  constructor(private router: Router, favoriteSevice: FavoriteService) {
+  constructor(private router: Router, favoriteSevice: FavoriteService, private customerService: CustomerService) {
     favoriteSevice.getFavoriteObservable().subscribe((favorite) => {
     this.favoriteCount = favorite.totalCount;
     })
@@ -35,4 +36,12 @@ export class HeaderComponent {
       this.router.navigate(['/'], { queryParams: { searchTerm: this.searchTerm } }); 
     }
   }
+  // ngOnInit() {
+  //   this.getProfile();
+  // }
+  // getProfile() {
+  //   this.customerService.getProfile().subscribe((res) => {
+  //     console.log('Profile data:', res);
+  //   });
+  // }
 }
