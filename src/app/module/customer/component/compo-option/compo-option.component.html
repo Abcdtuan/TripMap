@@ -1,24 +1,38 @@
-<div class="option-detail">
-    <div class="ticket-row">
-      <div>
-        <div class="ticket-type">{{ type | uppercase }}</div>
-        <div class="ticket-price">{{ price | number }} VND</div>
-        <div class="ticket-note">{{ note }}</div>
-      </div>
-      <div class="quantity-group">
-        <button (click)="decrease()" [disabled]="quantity === 0">-</button>
-        <input type="text" [value]="quantity" readonly>
-        <button (click)="increase()">+</button>
-      </div>
-    </div>
+<div class="booking-container">
+  <h2>Đặt Tour</h2>
+
+  <!-- Form chọn ngày -->
+  <div class="form-group">
+    <label for="bookingDate">Chọn ngày:</label>
+    <input type="date" id="bookingDate" class="form-control" [(ngModel)]="bookingDate" required />
+  </div>
   
-    <hr>
-  
-    <div class="total-row">
-      <div>
-        <div class="total-label">Tổng giá tiền</div>
-        <div class="total-price">{{ total | number }} VND</div>
-      </div>
-      <button class="order-btn">Đặt ngay</button>
+
+  <!-- Form nhập số người -->
+  <div class="form-group">
+    <label for="numberOfPeople">Số người:</label>
+    <div class="quantity-control">
+      <button (click)="decrease()" class="btn btn-secondary">-</button>
+      <input
+        type="number"
+        id="numberOfPeople"
+        class="form-control"
+        [(ngModel)]="quantity"
+        [min]="1"
+        required
+      />
+      <button (click)="increase()" class="btn btn-secondary">+</button>
     </div>
   </div>
+
+  <!-- Hiển thị giá -->
+  <div class="form-group">
+    <label for="price">Giá:</label>
+    <p id="price">{{ total | currency:'VND' }}</p>
+  </div>
+
+  <!-- Nút đặt tour -->
+  <button (click)="bookingTrip()" class="btn btn-primary" [disabled]="!bookingDate || quantity <= 0">
+    Đặt Tour
+  </button>
+</div>

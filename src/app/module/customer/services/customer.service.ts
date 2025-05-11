@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StorageService } from '../../../services/storage.service';
 import { Observable } from 'rxjs';
-import { Tag } from '../../../shared/models/tag';
-import { sample_tags } from '../../../../data';
 
-const BASIC_URL = ["http://localhost:8080"];
+
+const BASIC_URL = "http://localhost:8080";
 @Injectable({
   providedIn: 'root'
 })
@@ -23,11 +22,14 @@ export class CustomerService {
       headers:this.createAuthorizationHeader()
     });
   }
-  getProfile():Observable<any>{
-    return this.http.get(BASIC_URL + '/api/customer/profile',{
-      headers:this.createAuthorizationHeader()
+
+  bookingTrip(bookingTripDto: any): Observable<any> {
+    // Truyền bookingTripDto vào body của request POST
+    return this.http.post(BASIC_URL + '/api/customer/trip/booking', bookingTripDto, {
+      headers: this.createAuthorizationHeader()
     });
   }
+
   createAuthorizationHeader(): HttpHeaders {
     let authHeaders: HttpHeaders = new HttpHeaders();
     return authHeaders.set(
