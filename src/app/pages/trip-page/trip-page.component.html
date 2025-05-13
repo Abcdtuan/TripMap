@@ -12,11 +12,7 @@
                 {{ trip.name }}
             </span>
         </div>
-        <div class="star-rating">
-            <star-rating 
-            [stars]="trip.stars">
-            </star-rating>
-        </div>
+
         <div class="origins">
             <span *ngFor="let origin of trip.origin">
                 {{ origin }}

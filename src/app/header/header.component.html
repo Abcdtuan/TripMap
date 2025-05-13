@@ -1,24 +1,24 @@
 
 <div class="header">
     <div class="shopName">
-        <h2><a href="#" routerLink="customer/customer-dashboard">Tripmap</a></h2>
+        <h2><a href="#" routerLink="customer/dashboard">Tripmap</a></h2>
     </div>
     <div class="header1">
         <ul class="list">
-            <li><a  routerLink="/customer/customer-dashboard" [queryParams]="{ tag: 'Du lịch trải nghiệm' }">Du lịch trải nghiệm</a></li>
-            <li><a  routerLink="/customer/customer-dashboard" [queryParams]="{ tag: 'Công viên giải trí' }">Công viên giải trí</a></li>
-            <li><a  routerLink="/customer/customer-dashboard" [queryParams]="{ tag: 'Du lịch biển đảo' }">Du lịch biển đảo</a></li>
-            <li><a  routerLink="/customer/customer-dashboard" [queryParams]="{ tag: 'Du lịch nghỉ dưỡng' }">Du lịch nghỉ dưỡng</a></li>
-            <li><a  routerLink="/customer/customer-dashboard" [queryParams]="{ tag: 'Du lịch tâm linh' }">Du lịch tâm linh</a></li>
+            <li><a  routerLink="/customer/dashboard" [queryParams]="{ tag: 'Du lịch trải nghiệm' }">Du lịch trải nghiệm</a></li>
+            <li><a  routerLink="/customer/dashboard" [queryParams]="{ tag: 'Công viên giải trí' }">Công viên giải trí</a></li>
+            <li><a  routerLink="/customer/dashboard" [queryParams]="{ tag: 'Du lịch biển đảo' }">Du lịch biển đảo</a></li>
+            <li><a  routerLink="/customer/dashboard" [queryParams]="{ tag: 'Du lịch nghỉ dưỡng' }">Du lịch nghỉ dưỡng</a></li>
+            <li><a  routerLink="/customer/dashboard" [queryParams]="{ tag: 'Du lịch tâm linh' }">Du lịch tâm linh</a></li>
             <li class="dropdown">
                 <a href="#">Điểm đến</a>
                 <ul class="dropdown-menu">
-                  <li><a routerLink="/customer/customer-dashboard" [queryParams]="{ origin: 'Quảng Ninh' }">Quảng Ninh</a></li>
-                  <li><a routerLink="/customer/customer-dashboard" [queryParams]="{ origin: 'Nha Trang' }">Nha Trang</a></li>
-                  <li><a routerLink="/customer/customer-dashboard" [queryParams]="{ origin: 'Hội An' }">Hội An</a></li>
-                  <li><a routerLink="/customer/customer-dashboard" [queryParams]="{ origin: 'Đà Nẵng' }">Đà Nẵng</a></li>
-                  <li><a routerLink="/customer/customer-dashboard" [queryParams]="{ origin: 'Hà Nội' }">Hà Nội</a></li>
-                  <li><a routerLink="/customer/customer-dashboard" [queryParams]="{ origin: 'Hồ CHí Minh' }">Hồ Chí Minh</a></li>
+                  <li><a routerLink="/customer/dashboard" [queryParams]="{ origin: 'Quảng Ninh' }">Quảng Ninh</a></li>
+                  <li><a routerLink="/customer/dashboard" [queryParams]="{ origin: 'Nha Trang' }">Nha Trang</a></li>
+                  <li><a routerLink="/customer/dashboard" [queryParams]="{ origin: 'Hội An' }">Hội An</a></li>
+                  <li><a routerLink="/customer/dashboard" [queryParams]="{ origin: 'Đà Nẵng' }">Đà Nẵng</a></li>
+                  <li><a routerLink="/customer/dashboard" [queryParams]="{ origin: 'Hà Nội' }">Hà Nội</a></li>
+                  <li><a routerLink="/customer/dashboard" [queryParams]="{ origin: 'Hồ CHí Minh' }">Hồ Chí Minh</a></li>
 
                 </ul>
             </li>
@@ -28,13 +28,13 @@
     <div class="left">
         <div class="searchbox">
             <input type="text" placeholder="Nhập từ khóa..." [(ngModel)]="searchTerm">
-            <button class="search-button" [routerLink]="'/customer/customer-dashboard'" [queryParams]="{ searchTerm: searchTerm }">Tìm kiếm</button>
+            <button class="search-button" [routerLink]="'/customer/dashboard'" [queryParams]="{ searchTerm: searchTerm }">Tìm kiếm</button>
           </div>
         <div class="menu-container">
             <a routerLink="/dashboard">Tuấn</a>
             <div class="menu"> 
                 <a routerLink="/profile">Hồ Sơ</a>
-                <a routerLink="/transation">Lịch sử giao dịch</a>
+                <a routerLink="/customer/my-booking">Lịch sử giao dịch</a>
                 <a (click)="logout()">Đăng Xuất</a>
             </div>  
         </div>

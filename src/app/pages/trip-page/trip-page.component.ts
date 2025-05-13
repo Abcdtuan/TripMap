@@ -15,7 +15,7 @@ import { TicketSelectorComponent } from '../../ticket-selector/ticket-selector.c
 @Component({
   selector: 'app-trip-page',
   standalone: true,
-  imports: [MatIconModule,NgIf, NotFoundComponent, StarRatingComponent, CommonModule, RouterLink, TicketSelectorComponent],
+  imports: [MatIconModule,NgIf, NotFoundComponent , CommonModule, RouterLink, ],
   templateUrl: './trip-page.component.html',
   styleUrl: './trip-page.component.scss'
 })

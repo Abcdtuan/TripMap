@@ -37,6 +37,19 @@ export class AdminService {
       headers:this.createAuthorizationHeader()
     });
   }
+
+  getTripBookings():Observable<any>{
+    return this.http.get(BASIC_URL + '/api/admin/trip/bookings',{
+      headers:this.createAuthorizationHeader()
+    });
+
+  }
+  changeBookingTripStatus(bookingId: number, status:string):Observable<any>{
+    return this.http.get(BASIC_URL + `/api/admin/trip/booking/${bookingId}/${status}` ,{
+      headers:this.createAuthorizationHeader()
+    });
+
+  }
      
    
   createAuthorizationHeader(): HttpHeaders {

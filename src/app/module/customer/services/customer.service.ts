@@ -24,8 +24,13 @@ export class CustomerService {
   }
 
   bookingTrip(bookingTripDto: any): Observable<any> {
-    // Truyền bookingTripDto vào body của request POST
     return this.http.post(BASIC_URL + '/api/customer/trip/booking', bookingTripDto, {
+      headers: this.createAuthorizationHeader()
+    });
+  }
+
+  getBookingByUserId(): Observable<any> {
+    return this.http.get(BASIC_URL + "/api/customer/trip/bookings/" + StorageService.getUserId(),  {
       headers: this.createAuthorizationHeader()
     });
   }

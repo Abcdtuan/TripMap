@@ -1,6 +1,6 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CustomerService } from '../../services/customer.service';
 import { StorageService } from '../../../../services/storage.service';
@@ -27,7 +27,8 @@ export class CompoOptionComponent {
   constructor(
     private route: ActivatedRoute,
     private customerService: CustomerService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {
     // Lấy tripId từ route parameters
     this.tripId = this.route.snapshot.params['id'];
@@ -59,21 +60,24 @@ export class CompoOptionComponent {
     // Tạo DTO để gửi lên backend
     const bookingTripDto = {
       userId: userId,
-      tripId: this.tripId, // Sử dụng tripId từ route parameters
-      comboId: this.comboId, // Sử dụng comboId từ query parameters
+      tripId: this.tripId, 
+      comboId: this.comboId, 
       bookingDate: this.bookingDate,
       numberOfPeople: this.quantity,
-      price: this.total // Tổng giá tiền
+      price: this.total 
     };
 
     console.log('Dữ liệu gửi lên backend:', bookingTripDto);
 
     this.customerService.bookingTrip(bookingTripDto).subscribe({
       next: (res) => {
+        alert('Đặt tour thành công!');
+        this.router.navigateByUrl('/customer/customer-dashboard');
         console.log('Đặt tour thành công:', res);
         this.isSpinning = false;
       },
       error: (err) => {
+        alert('Đặt tour thất bại! Vui lòng thử lại sau.');
         console.error('Lỗi khi đặt tour:', err);
         this.isSpinning = false;
       }
