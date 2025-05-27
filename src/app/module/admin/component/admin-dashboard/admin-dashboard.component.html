@@ -1,23 +1,23 @@
 <div class="trip-list">
-    <div class="trip-card" *ngFor="let trip of trips">
-      <div class="trip-card-content">
-        <img [src]="trip.processedImg" alt="{{trip.name}}" class="trip-image">
-  
-        <div class="trip-info">
-          <h2 class="trip-title">{{ trip.name }}</h2>
-          <p class="trip-subtitle">{{ trip.tag }}</p>
-          <hr>
-          <p><strong>Xuất phát:</strong> {{ trip.origin }}</p>
-          <p class="price-info">
-            <strong>Giá tiền:</strong> 
-            <span>{{ trip.price | number }}₫</span>
-          </p>
-          <div class="button-group">
-            <button class="update-btn" routerLink="/admin/trip/{{trip.id}}">Update</button>
-            <button class="delete-btn" (click)="deleteTrip(trip.id)">Delete</button>
-          </div>
+  <div class="trip-card" *ngFor="let trip of trips">
+    <div class="trip-card-content">
+      <img [src]="trip.processedImg" alt="{{trip.name}}" class="trip-image">
+
+      <div class="trip-info">
+        <h2 class="trip-title">{{ trip.name }}</h2>
+        <p class="trip-subtitle">{{ trip.tag }}</p>
+        <hr>
+        <p><strong>Xuất phát:</strong> {{ trip.origin }}</p>
+        <p class="price-info">
+          <strong>Giá tiền:</strong> 
+          <span>{{ trip.price | number }}₫</span>
+        </p>
+        <div class="button-group">
+          <button class="update-btn" routerLink="/admin/trip/{{trip.id}}">Update</button>
+          <button class="delete-btn" (click)="deleteTrip(trip.id)">Delete</button>
         </div>
-        
       </div>
+      
     </div>
+  </div>
 </div>

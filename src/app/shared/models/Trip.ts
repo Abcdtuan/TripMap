@@ -16,8 +16,7 @@ export interface ScheduleItem {
 }
 export interface ComboOption {
     label: string;            
-    price: number;           
-    originalPrice?: number;           
+    price: number;                   
     note?: string;            
 }
 export interface Combo {

@@ -1,5 +1,5 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component } from '@angular/core';
+import { Component, } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CustomerService } from '../../services/customer.service';
@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './compo-option.component.html',
   styleUrl: './compo-option.component.scss'
 })
-export class CompoOptionComponent {
+export class CompoOptionComponent   {
   type = '';
   price = 0;
   note = '';
@@ -22,7 +22,8 @@ export class CompoOptionComponent {
   ValidateForm!: FormGroup;
   isSpinning = false;
   tripId: string = ''; // Lưu tripId từ route parameters
-  comboId: string = ''; // Lưu comboId từ query parameters
+  comboId: string = '';
+  comboOption: any[] = []
 
   constructor(
     private route: ActivatedRoute,
@@ -32,7 +33,7 @@ export class CompoOptionComponent {
   ) {
     // Lấy tripId từ route parameters
     this.tripId = this.route.snapshot.params['id'];
-    console.log('Trip ID từ route parameters:', this.tripId);
+    
 
     // Lấy các query parameters khác
     this.route.queryParams.subscribe((params) => {
@@ -46,6 +47,7 @@ export class CompoOptionComponent {
   ngOnInit() {
     this.ValidateForm = this.fb.group({});
   }
+  
 
   bookingTrip() {
     if (!this.bookingDate || this.quantity <= 0) {
@@ -67,7 +69,7 @@ export class CompoOptionComponent {
       price: this.total 
     };
 
-    console.log('Dữ liệu gửi lên backend:', bookingTripDto);
+    
 
     this.customerService.bookingTrip(bookingTripDto).subscribe({
       next: (res) => {

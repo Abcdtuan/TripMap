@@ -1,8 +1,5 @@
 
 import { Injectable,  } from '@angular/core';
-
-
-
 const TOKEN = "token";
 const USER = "user";
 @Injectable({
@@ -21,13 +18,18 @@ export class StorageService {
     window.localStorage.removeItem(USER);
     window.localStorage.setItem(USER, JSON.stringify(user))
   }
-  static getUserId(): String{
+  static getUserId(): number{
     const user = this.getUser();
-    if(user == null) { return ''; };
+    if(user == null) { return 0; };
     return user.id;
   }
   static getToken(){
     return window.localStorage.getItem(TOKEN);
+  }
+  static getUserName(): any{
+    const user = this.getUser();
+    if(user == null) { return ''; };
+    return user.name;
   }
   static getUser(){
     const user = localStorage.getItem(USER);
@@ -46,7 +48,7 @@ export class StorageService {
   static isCustomerLoggedIn():boolean{
     if(this.getToken() == null) return false;
     const role :string = this.getUserRole();
-    return role === "CUSTOMER";
+    return role == "CUSTOMER";
   }
   static logout(): void{
     window.localStorage.removeItem(TOKEN);

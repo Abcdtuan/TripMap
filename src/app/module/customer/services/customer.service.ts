@@ -34,6 +34,37 @@ export class CustomerService {
       headers: this.createAuthorizationHeader()
     });
   }
+    getProfile():Observable<any>{
+    return this.http.get(BASIC_URL + '/api/customer/profile',{
+      headers:this.createAuthorizationHeader()
+    });
+  }
+  putProfile(data: any): Observable<any> {
+    return this.http.put(BASIC_URL + '/api/customer/updateCustomer', data, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
+  deleteProfile(id:number):Observable<any>{
+    return this.http.delete(BASIC_URL + '/api/customer/deleteCustomer/' + id,{
+      headers:this.createAuthorizationHeader()
+    });
+  }
+  getFavoriteItems(userId: number): Observable<any> {
+    return this.http.get(BASIC_URL + '/api/customer/favorite/' + userId, {
+      headers: this.createAuthorizationHeader()
+    });
+  }
+  addToFavorite(userId: number, tripId: number): Observable<any> {
+    return this.http.post(`${BASIC_URL}/api/customer/favorite/add/${userId}/${tripId}`, {}, {
+      headers: this.createAuthorizationHeader()
+    });
+  }
+  removeFromFavorite(favoriteId: number): Observable<any> {
+    return this.http.delete(BASIC_URL + '/api/customer/favorite/remove/' + favoriteId, {
+      headers: this.createAuthorizationHeader()
+    });
+  }
 
   createAuthorizationHeader(): HttpHeaders {
     let authHeaders: HttpHeaders = new HttpHeaders();

@@ -31,15 +31,15 @@
             <button class="search-button" [routerLink]="'/customer/dashboard'" [queryParams]="{ searchTerm: searchTerm }">Tìm kiếm</button>
           </div>
         <div class="menu-container">
-            <a routerLink="/dashboard">Tuấn</a>
+            <a routerLink="/dashboard">{{name || 'Chưa đăng nhập'}}</a>
             <div class="menu"> 
-                <a routerLink="/profile">Hồ Sơ</a>
+                <a routerLink="/customer/profile">Hồ Sơ</a>
                 <a routerLink="/customer/my-booking">Lịch sử giao dịch</a>
                 <a (click)="logout()">Đăng Xuất</a>
             </div>  
         </div>
         <div class="icon">
-            <a routerLink="/favorite-page" class="favorite-icon">
+            <a routerLink="/customer/favorite" class="favorite-icon">
                 <mat-icon>favorite</mat-icon>
                 <span class="favorite-count" *ngIf="favoriteCount ">{{favoriteCount}}</span>
             </a>

@@ -8,7 +8,7 @@
         <div class="location">{{ trip.origin }}</div>
         <div class="tag">{{ trip.tag }}</div>
         <div class="price">₫{{ trip.price | number }}</div>
-        <button class="favorite-btn">Thêm vào yêu thích</button>
+        <button class="favorite-btn " *ngIf="!isFavorite" (click)="addToFavorite()">Thêm vào yêu thích</button>
 
         <!-- Mô tả -->
         <div class="description">

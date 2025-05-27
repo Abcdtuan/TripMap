@@ -18,30 +18,29 @@ import { CustomerService } from '../module/customer/services/customer.service';
 export class HeaderComponent {
   
   searchTerm: string = '';
+  name: any;
   favoriteCount = 0;
   constructor(private router: Router, favoriteSevice: FavoriteService, private customerService: CustomerService) {
     favoriteSevice.getFavoriteObservable().subscribe((favorite) => {
     this.favoriteCount = favorite.totalCount;
     })
-  } 
+  }
+      
 
-   logout(){
-      StorageService.logout();
-      this.router.navigate(['/account/login']);
-    }
-    
-
+  
+  ngOnInit(): void {
+    this.name = StorageService.getUserName();
+      
+  }
+  logout(){
+    StorageService.logout();
+    this.router.navigate(['/account/login']);
+  }
+ 
   search() {
     if (this.searchTerm.trim()) {
       this.router.navigate(['/'], { queryParams: { searchTerm: this.searchTerm } }); 
     }
   }
-  // ngOnInit() {
-  //   this.getProfile();
-  // }
-  // getProfile() {
-  //   this.customerService.getProfile().subscribe((res) => {
-  //     console.log('Profile data:', res);
-  //   });
-  // }
+  
 }

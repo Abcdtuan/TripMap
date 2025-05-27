@@ -64,7 +64,15 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 15px rgba(255, 71, 87, 0.2);
         }
+        .favorite-btn.added {
+            background: linear-gradient(135deg, #2ed573 0%, #1eae60 100%);
+        }
+
+        .favorite-btn.added:hover {
+            box-shadow: 0 8px 15px rgba(46, 213, 115, 0.2);
+        }
     }
+    
 
     .description {
         color: #4b5563;

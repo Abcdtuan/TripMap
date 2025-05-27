@@ -1,19 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,  } from '@angular/core';
 import { CustomerService } from '../../services/customer.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { StorageService } from '../../../../services/storage.service';
+
 
 @Component({
   selector: 'app-page-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, ],
   templateUrl: './page-detail.component.html',
   styleUrl: './page-detail.component.scss'
 })
 export class PageDetailComponent  {
-  tripId: number; // ID của trip lấy từ URL
-  trip: any = {}; // Lưu thông tin trip
+  tripId: number; 
+  trip: any = {}; 
+  isFavorite: boolean = false;
 
   constructor(
     private customerService: CustomerService,
@@ -26,19 +28,15 @@ export class PageDetailComponent  {
   }
 
   ngOnInit(): void {
-    // Gọi API để lấy thông tin trip
+    
     this.getTripById();
   }
 
-  /**
-   * Gọi API để lấy thông tin trip theo ID
-   * @param id ID của trip (mặc định là this.tripId)
-   */
+  
   getTripById(id: number = this.tripId): void {
     this.customerService.getTripById(id).subscribe(
       (res) => {
         try {
-          // Parse các trường JSON nếu có
           res.schedule = this.safeParseJSON(res.schedule, []);
           res.combos = this.safeParseJSON(res.combos, []);
           res.origin = this.safeParseJSON(res.origin, '');
@@ -63,10 +61,7 @@ export class PageDetailComponent  {
     );
   }
 
-  /**
-   * Điều hướng đến trang combo-option với queryParams
-   * @param option Combo option được chọn
-   */
+  
   goToComboOption(combo: any,option: any): void {
     const url = `customer/page-details/${this.tripId}/combo-option`;
     this.router.navigateByUrl(
@@ -81,12 +76,8 @@ export class PageDetailComponent  {
     );
   }
 
-  /**
-   * Hàm an toàn để parse JSON
-   * @param jsonString Chuỗi JSON cần parse
-   * @param defaultValue Giá trị mặc định nếu parse lỗi
-   * @returns Giá trị đã parse hoặc giá trị mặc định
-   */
+  
+   
   private safeParseJSON(jsonString: string, defaultValue: any): any {
     try {
       return JSON.parse(jsonString || JSON.stringify(defaultValue));
@@ -94,5 +85,19 @@ export class PageDetailComponent  {
       console.error('Error parsing JSON:', e);
       return defaultValue;
     }
+  }
+  addToFavorite() {
+    const userId = StorageService.getUserId();
+    this.customerService.addToFavorite(userId, this.trip.id).subscribe({
+      next: (res) =>{
+        console.log('Added to favorite:', res);
+        alert('Đã thêm vào mục yêu thích');
+      },
+      error: (err) => {
+        console.error('Error adding to favorite:', err);
+        alert('Thêm vào mục yêu thích thất bại');
+        this.isFavorite = true;
+      }
+  })
   }
 }

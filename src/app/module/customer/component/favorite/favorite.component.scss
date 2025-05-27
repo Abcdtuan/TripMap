@@ -1,0 +1,96 @@
+/* filepath: d:\angular\source code\hello-world\src\app\module\customer\component\favorite\favorite.component.scss */
+
+.container {
+  max-width: 100%; /* Đặt chiều rộng tối đa để khớp với header */
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+.card-content {
+  flex: 2; /* Chiếm nhiều không gian hơn */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between; /* Đặt tên và giá ở hai đầu */
+  align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.card-header h3 {
+  font-size: 18px;
+  margin: 0;
+  color: #333;
+  white-space: nowrap; /* Không xuống dòng */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Thêm dấu "..." nếu tên quá dài */
+}
+
+.card-header .price {
+  font-size: 16px;
+  color: #008fe2;
+  margin: 0;
+  white-space: nowrap; /* Không xuống dòng */
+  text-align: center; /* Căn giữa giá */
+}
+
+.card-price {
+  flex: 1; /* Chiếm không gian vừa đủ */
+  text-align: center;
+  
+}
+
+.card-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Căn phải */
+}
+
+.card-actions button {
+  padding: 8px 12px;
+  background-color: #ff4d4f;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.card-actions button:hover {
+  background-color: #d9363e;
+}
+
+p {
+  text-align: center;
+  color: #777;
+}

@@ -45,7 +45,8 @@ export class LoginComponent {
         if (res.userId != null) {
           const user = {
             id: res.userId,
-            role: res.userRole
+            role: res.userRole,
+            name: res.name,
           };
           StorageService.saveUser(user);
           StorageService.saveToken(res.jwt);
@@ -68,6 +69,7 @@ export class LoginComponent {
       }
     });
   }
+  
   
 
    

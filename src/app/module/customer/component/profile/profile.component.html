@@ -1,0 +1,8 @@
+<div *ngIf="loading">Đang tải...</div>
+
+<div *ngIf="user" class="profile-card">
+  <h2>{{ user.name || 'Tên người dùng' }}</h2>
+  <p class="email">{{ user.email || 'Email không có' }}</p>
+  <button class="edit-btn" (click)="goToEditProfile()">Chỉnh sửa hồ sơ</button>
+</div>
+

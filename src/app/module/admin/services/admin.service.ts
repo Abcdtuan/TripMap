@@ -51,7 +51,16 @@ export class AdminService {
 
   }
      
-   
+    getAllUsers():Observable<any>{
+    return this.http.get(BASIC_URL + '/api/admin/allUsers',{
+      headers:this.createAuthorizationHeader()
+    });
+  }
+  deleteUser(id:number):Observable<any>{
+    return this.http.delete(BASIC_URL + '/api/admin/deleteUser/' + id,{
+      headers:this.createAuthorizationHeader()
+    });
+  }
   createAuthorizationHeader(): HttpHeaders {
     let authHeaders: HttpHeaders = new HttpHeaders();
     return authHeaders.set(
